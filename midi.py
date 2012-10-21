@@ -27,6 +27,7 @@ except ImportError:
 
 
 class Midi():
+
     def __init__(self):
         """Initialize a MIDI communication channel"""
         # Initialize Pygame's MIDI
@@ -82,7 +83,7 @@ class Midi():
         for raw_answer in raw_answers:
             for event in raw_answer:
                 for data in event[0]:
-                    answer.append(hex(data))
+                    answer.append(data)
                     # Strip remaining garbage data after sysex end
                     if data == 0xf7:
                         break

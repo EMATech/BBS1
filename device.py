@@ -20,17 +20,20 @@ import midi
 import sysex
 
 
-class BBS1():
-#    midi
-#    mode
-#    hw_version
-#    fw_version
+class Bbs1():
+
     def __init__(self):
-        self.com = midi.Midi()
+        try:
+            self.com = midi.Midi()
+        except:
+            raise Exception()
 
     def present(self):
         """Tests if the hardware is present and if communication is possible"""
-        return self.com.get_data(sysex.MSG_CONNECTED)
+        reply = self.com.get_data(sysex.MSG_CONNECTED)
+        if reply == sysex.ANS_CONNECTED:
+            return True
+        return False
 
     def get_mode(self):
         """Gets the current mode (Normal/Firmware upload)"""

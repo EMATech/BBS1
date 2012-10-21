@@ -22,14 +22,8 @@
 # TODO: extract tempo maps
 # TODO: send tempo map
 
-import device
 import ui
 
-
-def main():
-    dev = device.BBS1()
-    print dev.present()
-
-
 if __name__ == "__main__":
-    main()
+    app = ui.Bbs1App()
+    app.run(None)
