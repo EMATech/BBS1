@@ -161,6 +161,20 @@ MSG_MODE.append(_REQ_MODE)
 ## Unused 4 bytes ignored
 MSG_MODE.append(_SYX_END)
 
+_ANS_MODE = _PREAMBLE[:]
+_ANS_MODE.append(_ACK_OK)
+_ANS_MODE.append(_RESERVED)
+_ANS_MODE.append(_ACK_MODE)
+
+
+ANS_NORMAL_MODE = _ANS_MODE[:]
+ANS_NORMAL_MODE.append(0x00)
+ANS_NORMAL_MODE.append(_SYX_END)
+
+ANS_FW_MODE = _ANS_MODE[:]
+ANS_FW_MODE.append(0x01)
+ANS_FW_MODE.append(_SYX_END)
+
 # Hardware version
 MSG_HW_VERS = _SEND_DATA[:]
 MSG_HW_VERS.append(_REQ_HW_VERS)

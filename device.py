@@ -25,8 +25,8 @@ class Bbs1():
     def __init__(self):
         try:
             self.com = midi.Midi()
-        except:
-            raise Exception()
+        except IOError:
+            raise IOError
 
     def present(self):
         """Tests if the hardware is present and if communication is possible"""
@@ -37,9 +37,16 @@ class Bbs1():
 
     def get_mode(self):
         """Gets the current mode (Normal/Firmware upload)"""
-        return self.com.get_data(sysex.MSG_MODE)
+        reply = self.com.get_data(sysex.MSG_MODE)
+        if reply == sysex.ANS_NORMAL_MODE:
+            return 'normal'
+        elif reply == sysex.ANS_FW_MODE:
+            return 'firmware update'
+        else:
+            # Unexpected reply
+            raise Warning
 
-    def get_version(self, part):
+    def _get_version(self, part):
         """Returns the version in human readable form"""
         raw_version = self.com.get_data(part)
         version = str(raw_version[12]) + '.'\
@@ -48,8 +55,8 @@ class Bbs1():
 
     def get_hardware_version(self):
         """Returns the hardware version in human readable form"""
-        return self.get_version(sysex.MSG_HW_VERS)
+        return self._get_version(sysex.MSG_HW_VERS)
 
     def get_firmware_version(self):
         """Returns the firmware version in human readable form"""
-        return self.get_version(sysex.MSG_FW_VERS)
+        return self._get_version(sysex.MSG_FW_VERS)

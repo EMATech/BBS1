@@ -17,11 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# TODO: GUI
+# TODO: Basic GUI
 # TODO: send firmware update
 # TODO: extract tempo maps
 # TODO: send tempo map
+# TODO: add getext i18n
 
+import logging
 import ui
 
 if __name__ == "__main__":

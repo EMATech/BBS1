@@ -16,14 +16,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
+import logging
 import re
 
 try:
     from pygame import midi
 except ImportError:
     print("This script needs pygame to run")
-    sys.exit(1)
+    raise ImportError
 
 
 class Midi():
@@ -49,14 +49,20 @@ class Midi():
         try:
             dev_in
         except NameError:
-            print("Couldn't find BodyBeatSync's input port")
-            sys.exit(1)
+            logging.warning("Couldn't find BodyBeatSync's input port")
+            # Very important to destroy the context else the ports are not
+            # reenumerated !
+            midi.quit()
+            raise IOError
 
         try:
             dev_out
         except NameError:
-            print("Couldn't find BodyBeatSync's output port")
-            sys.exit(1)
+            logging.warning("Couldn't find BodyBeatSync's output port")
+            # Very important to destroy the context else the ports are not
+            # reenumerated !
+            midi.quit()
+            raise IOError
 
         # Open input and output
         self.midi_in = midi.Input(dev_in)

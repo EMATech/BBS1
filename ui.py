@@ -29,29 +29,61 @@ except ImportError:
 class Bbs1App(Gtk.Application):
 
     def __init__(self):
-        Gtk.Application.__init__(self, application_id="apps.bbs1",
+        Gtk.Application.__init__(self, application_id='apps.bbs1',
                                  flags=Gio.ApplicationFlags.FLAGS_NONE)
-        self.connect("activate", self.on_activate)
+        self.connect('activate', self.on_activate)
 
     def on_activate(self, data=None):
         self.builder = Gtk.Builder()
         self.builder.add_from_file('bbs1.glade')
         window = self.builder.get_object('BBS1')
         window.show_all()
+        self.button = self.builder.get_object('button1')
+        self.button.hide()
+        self.button.set_label("Retry…")
+        self.button.connect('clicked', self.init_device)
         self.add_window(window)
-        try:
-            self.dev = device.Bbs1()
-        except:
-            self.msg_print('BBS-1 not found')
-            return
-        self.is_here()
-
-    def is_here(self):
-        if self.dev.present():
-            self.msg_print('BBS-1 found')
-        else:
-            self.msg_print('BBS-1 not answering')
+        self.init_device()
 
     def msg_print(self, msg):
-        label = self.builder.get_object('label1')
-        label.set_text(msg)
+        message_label = self.builder.get_object('label1')
+        message_label.set_text(msg)
+
+    def init_device(self, data=None):
+        try:
+            self.dev = device.Bbs1()
+        except IOError:
+            self.msg_print(
+                "BBS-1 not found!\n"
+                "Please check that it is properly connected and powered up\n"
+                "and click retry")
+            self.button.show()
+        else:
+            self.msg_print("BBS-1 found, trying to connect…")
+            self.connect_device()
+
+    def connect_device(self):
+        if self.dev.present():
+            self.button.hide()
+            mode = self.dev.get_mode()
+            self.msg_print("Connected to BBS-1 revision "
+            + self.dev.get_hardware_version()
+            + " in "
+            + mode
+            + " mode running firmware version "
+            + self.dev.get_firmware_version())
+            if mode == 'normal':
+                self.normal()
+            else:
+                self.firmware()
+        else:
+            self.msg_print("BBS-1 not answering")
+            self.button.show()
+
+    def normal(self):
+        # TODO
+        pass
+
+    def firmware(self):
+        # TODO
+        pass
