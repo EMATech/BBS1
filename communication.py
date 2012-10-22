@@ -26,7 +26,7 @@ except ImportError:
     raise ImportError
 
 
-class Midi():
+class Communication():
 
     def __init__(self):
         """Initialize a MIDI communication channel"""
@@ -50,30 +50,27 @@ class Midi():
             dev_in
         except NameError:
             logging.warning("Couldn't find BodyBeatSync's input port")
-            # Very important to destroy the context else the ports are not
-            # reenumerated !
-            midi.quit()
             raise IOError
 
         try:
             dev_out
         except NameError:
             logging.warning("Couldn't find BodyBeatSync's output port")
-            # Very important to destroy the context else the ports are not
-            # reenumerated !
-            midi.quit()
             raise IOError
 
         # Open input and output
         self.midi_in = midi.Input(dev_in)
         self.midi_out = midi.Output(dev_out)
 
+    def __del__(self):
+        midi.quit()
+
     def send(self, msg):
         """Sends out SysEx message"""
         self.midi_out.write_sys_ex(0, msg)
 
     def get_data(self, msg):
-        """Gets data from the hardware"""
+        """Gets reply from the hardware after sending a message"""
         self.send(msg)
 
         # Wait for answer
@@ -83,6 +80,7 @@ class Midi():
         # Read answer
         raw_answers = list()
         answer = list()
+
         while self.midi_in.poll():
             raw_answers.append(self.midi_in.read(1))
 

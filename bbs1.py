@@ -17,11 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# TODO: Basic GUI
-# TODO: send firmware update
-# TODO: extract tempo maps
-# TODO: send tempo map
-# TODO: add getext i18n
+# TODO: About dialog
+# TODO: Send firmware update
+# TODO: Check for firmware update
+# TODO: Extract tempo maps
+# TODO: Send tempo map
+# TODO: Tempo map wizard
+# TODO: i18n (getext)
+# TODO: Wireless protocol
 
 import logging
 import ui
@@ -29,3 +32,4 @@ import ui
 if __name__ == "__main__":
     app = ui.Bbs1App()
     app.run(None)
+    logging.info('Application exit')

@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import midi
+import communication
 import sysex
 
 
@@ -24,9 +24,16 @@ class Bbs1():
 
     def __init__(self):
         try:
-            self.com = midi.Midi()
+            self.com = communication.Communication()
         except IOError:
             raise IOError
+
+    def __del__(self):
+        try:
+            self.com.__del__()
+        except AttributeError:
+            # self.com might not exist. This is not an issue: keep going
+            pass
 
     def present(self):
         """Tests if the hardware is present and if communication is possible"""

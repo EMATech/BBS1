@@ -39,8 +39,7 @@ class Bbs1App(Gtk.Application):
         window = self.builder.get_object('BBS1')
         window.show_all()
         self.button = self.builder.get_object('button1')
-        self.button.hide()
-        self.button.set_label("Retry…")
+        self.button.set_label("Reconnect")
         self.button.connect('clicked', self.init_device)
         self.add_window(window)
         self.init_device()
@@ -50,35 +49,39 @@ class Bbs1App(Gtk.Application):
         message_label.set_text(msg)
 
     def init_device(self, data=None):
+        # FIXME: if the device is plugged, this only works half the time
+        try:
+            self.dev.__del__()
+        except AttributeError:
+            # self.dev might not exist. This is not an issue: keep going
+            pass
+
         try:
             self.dev = device.Bbs1()
         except IOError:
             self.msg_print(
                 "BBS-1 not found!\n"
-                "Please check that it is properly connected and powered up\n"
-                "and click retry")
-            self.button.show()
+                "Please check that:\n"
+                " - it is properly connected\n"
+                " - it is powered up")
         else:
-            self.msg_print("BBS-1 found, trying to connect…")
+            self.msg_print("BBS-1 found!\n"
+                "Trying to connect…")
             self.connect_device()
 
     def connect_device(self):
         if self.dev.present():
-            self.button.hide()
             mode = self.dev.get_mode()
-            self.msg_print("Connected to BBS-1 revision "
-            + self.dev.get_hardware_version()
-            + " in "
-            + mode
-            + " mode running firmware version "
-            + self.dev.get_firmware_version())
+            self.msg_print("Connected to BBS-1!\n"
+            "- mode: " + mode + "\n"
+            "- revision: " + self.dev.get_hardware_version() + "\n"
+            "- firmware version: " + self.dev.get_firmware_version())
             if mode == 'normal':
                 self.normal()
             else:
                 self.firmware()
         else:
             self.msg_print("BBS-1 not answering")
-            self.button.show()
 
     def normal(self):
         # TODO
