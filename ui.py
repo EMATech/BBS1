@@ -1,5 +1,4 @@
 # -*- coding: utf-8 *-*
-
 """BBS1 GUI handling"""
 # A tool to communicate with Peterson's BBS-1 metronome
 # Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
@@ -53,6 +52,8 @@ class Bbs1App(Gtk.Application):
         # Version labels
         self.hw_vers = self.builder.get_object('hw_vers')
         self.fw_vers = self.builder.get_object('fw_vers')
+        self.hw_vers.set_text("unknown")
+        self.fw_vers.set_text("unknown")
 
         # Alert dialogs
         self.comm_alert = self.builder.get_object('comm_alert')
@@ -115,7 +116,7 @@ class Bbs1App(Gtk.Application):
         """Show an alert reporting failed device initialization"""
         if self.init_alert.run() == -5:  # OK button
             self.init_alert.hide()
-            self.init_device()
+            self.init_communication()
         else:
             self.quit()
 
@@ -138,7 +139,7 @@ class Bbs1App(Gtk.Application):
         """Show an alert reporting failed device communication"""
         if self.connect_alert.run() == -5:  # OK button
             self.connect_alert.hide()
-            self.connect_device()
+            self.init_communication()
         else:
             self.quit()
 

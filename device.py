@@ -21,6 +21,9 @@ import sysex
 
 class Bbs1():
     """BBS1 device and associated commands"""
+    hw_vers = "unknown"
+    fw_vers = "unknown"
+
     def __init__(self, com):
         """Initialize device"""
         try:
@@ -63,8 +66,10 @@ class Bbs1():
 
     def get_hardware_version(self):
         """Returns the hardware version in human readable form"""
-        return self._get_version(sysex.MSG_HW_VERS)
+        self.hw_vers = self._get_version(sysex.MSG_HW_VERS)
+        return self.hw_vers
 
     def get_firmware_version(self):
         """Returns the firmware version in human readable form"""
-        return self._get_version(sysex.MSG_FW_VERS)
+        self.fw_vers = self._get_version(sysex.MSG_FW_VERS)
+        return self.fw_vers

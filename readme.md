@@ -10,17 +10,16 @@ About
 -----
 This is mainly an experiment involving reverse engineering a cool piece of harware and a pretext for learning Python, pygobject (GTK+ 3), getext and pygame midi.
 
-
 Thanks
 ------
 Thanks to Peterson's Vice President Patrick Bovenizer for sending me the protocol's documentation even if somewhat outdated.
 
 Implemented
 -----------
-- Very basic GUI
+- Basic GUI
 - Autodetection of the device (usbmidi)
-- Manual connection to the device
-- Error handling (device not connected…)
+- Reconnection to the device
+- Error handling (midi initialization, device not connected or not responding)
 - Displaying bootup mode and hardware/firmware versions
 
 Todo

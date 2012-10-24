@@ -33,7 +33,6 @@ class Communication():
         """Initialize a MIDI communication channel"""
         # Initialize Pygame's MIDI
         midi.init()
-        raise IOError("Test")
 
     def __del__(self):
         """Destroy MIDI communication channel"""
