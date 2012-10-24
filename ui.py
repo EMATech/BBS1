@@ -36,17 +36,26 @@ class Bbs1App(Gtk.Application):
     def on_activate(self, data=None):
         self.builder = Gtk.Builder()
         self.builder.add_from_file('bbs1.glade')
-        window = self.builder.get_object('BBS1')
-        window.show_all()
-        self.button = self.builder.get_object('button1')
-        self.button.set_label("Reconnect")
-        self.button.connect('clicked', self.init_device)
-        self.add_window(window)
+
+        self.window = self.builder.get_object('BBS1')
+        self.window.show_all()
+        self.add_window(self.window)
+
+        self.message = self.builder.get_object('message')
+
+        self.hw_vers = self.builder.get_object('hw_vers')
+        self.fw_vers = self.builder.get_object('fw_vers')
+
+        self.init_alert = self.builder.get_object('init_alert')
+
+        self.connect_alert = self.builder.get_object('connect_alert')
+
+        self.msg_print("Detecting BBS-1…")
         self.init_device()
 
     def msg_print(self, msg):
-        message_label = self.builder.get_object('label1')
-        message_label.set_text(msg)
+        context = self.message.get_context_id(msg)
+        self.message.push(context, msg)
 
     def init_device(self, data=None):
         # FIXME: if the device is plugged, this only works half the time
@@ -60,28 +69,39 @@ class Bbs1App(Gtk.Application):
             self.dev = device.Bbs1()
         except IOError:
             self.msg_print(
-                "BBS-1 not found!\n"
-                "Please check that:\n"
-                " - it is properly connected\n"
-                " - it is powered up")
+                "BBS-1 not found!")
+            self.show_alert_init()
         else:
-            self.msg_print("BBS-1 found!\n"
-                "Trying to connect…")
+            self.msg_print("BBS-1 found! "
+            "Connecting…")
             self.connect_device()
+
+    def show_alert_init(self):
+        if self.init_alert.run() != -5:
+            self.quit()
+        else:
+            self.init_alert.hide()
+            self.init_device()
 
     def connect_device(self):
         if self.dev.present():
             mode = self.dev.get_mode()
-            self.msg_print("Connected to BBS-1!\n"
-            "- mode: " + mode + "\n"
-            "- revision: " + self.dev.get_hardware_version() + "\n"
-            "- firmware version: " + self.dev.get_firmware_version())
+            self.msg_print("BSS-1 connected!")
+            self.hw_vers.set_text(self.dev.get_hardware_version())
+            self.fw_vers.set_text(self.dev.get_firmware_version())
             if mode == 'normal':
                 self.normal()
             else:
                 self.firmware()
         else:
-            self.msg_print("BBS-1 not answering")
+            self.msg_print("BBS-1 not connected!")
+
+    def show_alert_connect(self):
+        if self.connect_alert.run() != -5:
+            self.quit()
+        else:
+            self.connect_alert.hide()
+            self.connect_device()
 
     def normal(self):
         # TODO
