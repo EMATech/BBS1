@@ -1,5 +1,5 @@
 # -*- coding: utf-8 *-*
-
+"""BBS1 device definitions"""
 # A tool to communicate with Peterson's BBS-1 metronome
 # Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
@@ -16,23 +16,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import communication
 import sysex
 
 
 class Bbs1():
-
-    def __init__(self):
+    """BBS1 device and associated commands"""
+    def __init__(self, com):
+        """Initialize device"""
         try:
-            self.com = communication.Communication()
+            com.connect()
         except IOError:
             raise IOError
+        self.com = com
 
     def __del__(self):
+        """Delete device"""
         try:
             self.com.__del__()
         except AttributeError:
-            # self.com might not exist. This is not an issue: keep going
+            # self.com may not exist. This is not an issue: keep going
             pass
 
     def present(self):
@@ -50,8 +52,7 @@ class Bbs1():
         elif reply == sysex.ANS_FW_MODE:
             return 'firmware update'
         else:
-            # Unexpected reply
-            raise Warning
+            raise Warning("Unexpected mode reply received : " + reply)
 
     def _get_version(self, part):
         """Returns the version in human readable form"""

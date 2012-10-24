@@ -1,7 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 *-*
-
-# A tool to communicate with Peterson's BBS-1 metronome
+"""A tool to communicate with Peterson's BBS-1 metronome"""
 # Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -30,6 +29,6 @@ import logging
 import ui
 
 if __name__ == "__main__":
-    app = ui.Bbs1App()
-    app.run(None)
+    APP = ui.Bbs1App()
+    APP.run(None)
     logging.info('Application exit')

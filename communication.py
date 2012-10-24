@@ -1,5 +1,5 @@
 # -*- coding: utf-8 *-*
-
+"""BBS1 MIDI communication handling"""
 # A tool to communicate with Peterson's BBS-1 metronome
 # Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
@@ -27,12 +27,20 @@ except ImportError:
 
 
 class Communication():
+    """MIDI communication"""
 
     def __init__(self):
         """Initialize a MIDI communication channel"""
         # Initialize Pygame's MIDI
         midi.init()
+        raise IOError("Test")
 
+    def __del__(self):
+        """Destroy MIDI communication channel"""
+        midi.quit()
+
+    def connect(self):
+        """Connect to the first BBS-1"""
         # Get number of MIDI devices
         devices = midi.get_count()
 
@@ -45,25 +53,24 @@ class Communication():
                 if(info[3] >= 1):
                     dev_out = i
 
-        # Let's check if we got something
+        # Let's check if we got something usable
         try:
             dev_in
         except NameError:
-            logging.warning("Couldn't find BodyBeatSync's input port")
-            raise IOError
+            error = "Couldn't find BodyBeatSync's input port"
+            logging.warning(error)
+            raise IOError(error)
 
         try:
             dev_out
         except NameError:
-            logging.warning("Couldn't find BodyBeatSync's output port")
-            raise IOError
+            error = "Couldn't find BodyBeatSync's output port"
+            logging.warning(error)
+            raise IOError(error)
 
         # Open input and output
         self.midi_in = midi.Input(dev_in)
         self.midi_out = midi.Output(dev_out)
-
-    def __del__(self):
-        midi.quit()
 
     def send(self, msg):
         """Sends out SysEx message"""

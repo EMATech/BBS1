@@ -34,6 +34,12 @@ Todo
 - i18n (getext)
 - Wireless protocol
 
+Dependencies
+------------
+- Python 2.x
+- pygame
+- pygobject
+
 Licence
 -------
 Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>

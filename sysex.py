@@ -1,5 +1,5 @@
 # -*- coding: utf-8 *-*
-
+"""BBS1 MIDI SysEx protocol definitions"""
 # A tool to communicate with Peterson's BBS-1 metronome
 # Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
