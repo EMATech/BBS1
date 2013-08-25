@@ -23,7 +23,7 @@ try:
     from pygame import midi
 except ImportError:
     print("This script needs pygame to run")
-    raise ImportError
+    raise
 
 
 class Communication():
@@ -46,10 +46,10 @@ class Communication():
         # Search for the first BodyBeatSync input and output ports
         for i in range(0, devices):
             info = midi.get_device_info(i)
-            if(re.match('.*BodyBeatSYNC MIDI 1.*', str(info[1]))):
-                if(info[2] >= 1):
+            if re.match('.*BodyBeatSYNC MIDI 1.*', str(info[1])):
+                if info[2] >= 1:
                     dev_in = i
-                if(info[3] >= 1):
+                if info[3] >= 1:
                     dev_out = i
 
         # Let's check if we got something usable

@@ -24,7 +24,7 @@ try:
     from gi.repository import Gtk, Gio
 except ImportError:
     print("This script needs pygobject to run")
-    sys.exit(1)
+    raise
 
 
 class Bbs1App(Gtk.Application):
