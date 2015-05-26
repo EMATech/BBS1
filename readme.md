@@ -35,13 +35,13 @@ Todo
 
 Dependencies
 ------------
-- Python 2.x
+- Python 2 or 3
 - pygame
 - pygobject
 
 Licence
 -------
-Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
+Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

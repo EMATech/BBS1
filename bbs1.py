@@ -1,7 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 *-*
 """A tool to communicate with Peterson's BBS-1 metronome"""
-# Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
+# Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

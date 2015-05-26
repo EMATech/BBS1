@@ -1,7 +1,7 @@
 # -*- coding: utf-8 *-*
 """BBS1 MIDI communication handling"""
 # A tool to communicate with Peterson's BBS-1 metronome
-# Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
+# Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -73,7 +73,11 @@ class Communication():
 
     def send(self, msg):
         """Sends out SysEx message"""
-        self.midi_out.write_sys_ex(0, msg)
+        try:
+            self.midi_out.write_sys_ex(0, msg)
+        except TypeError:
+            # We must be running Python 3, let's send bytes
+            self.midi_out.write_sys_ex(0, bytes(msg))
 
     def get_data(self, msg):
         """Gets reply from the hardware after sending a message"""
