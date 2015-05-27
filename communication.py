@@ -26,8 +26,10 @@ except ImportError:
     raise
 
 
-class Communication():
+class Communication:
     """MIDI communication"""
+    midi_in = None
+    midi_out = None
 
     def __init__(self):
         """Initialize a MIDI communication channel"""
@@ -72,7 +74,11 @@ class Communication():
         self.midi_out = midi.Output(dev_out)
 
     def send(self, msg):
-        """Sends out SysEx message"""
+        """Sends out SysEx message
+
+        :param msg: Message
+        :type msg: str
+        """
         try:
             self.midi_out.write_sys_ex(0, msg)
         except TypeError:
@@ -80,7 +86,11 @@ class Communication():
             self.midi_out.write_sys_ex(0, bytes(msg))
 
     def get_data(self, msg):
-        """Gets reply from the hardware after sending a message"""
+        """Gets reply from the hardware after sending a message
+
+        :param msg: Message
+        :type msg: str
+        """
         self.send(msg)
 
         # Wait for answer

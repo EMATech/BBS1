@@ -16,11 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 import communication
 import device
 
 try:
+    # noinspection PyPackageRequirements
     from gi.repository import Gtk, Gio
 except ImportError:
     print("This script needs pygobject to run")
@@ -29,7 +29,13 @@ except ImportError:
 
 class Bbs1App(Gtk.Application):
     """BBS1 main GUI application"""
-    
+    window = None
+    message = None
+    hw_vers = ''
+    fw_vers = ''
+    com = None
+    device = None
+
     def __init__(self):
         """Application initialization"""
         Gtk.Application.__init__(self, application_id='apps.bbs1',
@@ -60,16 +66,15 @@ class Bbs1App(Gtk.Application):
         self.hw_vers.set_text("unknown")
         self.fw_vers.set_text("unknown")
 
-        # Alert dialogs
-        self.comm_alert = self.builder.get_object('comm_alert')
-        self.init_alert = self.builder.get_object('init_alert')
-        self.connect_alert = self.builder.get_object('connect_alert')
-
         self.msg_print("Initializing")
         self.init_communication()
 
     def msg_print(self, msg):
-        """Print a message in the statusbar"""
+        """Print a message in the statusbar
+
+        :param msg: Message
+        :type msg: str
+        """
         context = self.message.get_context_id(msg)
         self.message.push(context, msg)
 
@@ -92,8 +97,9 @@ class Bbs1App(Gtk.Application):
 
     def show_alert_communication(self):
         """Show an alert reporting failed communication initialization"""
-        if self.comm_alert.run() == -5:  # OK button
-            self.comm_alert.hide()
+        comm_alert = self.builder.get_object('comm_alert')
+        if comm_alert.run() == -5:  # OK button
+            comm_alert.hide()
             self.init_communication()
         else:
             self.quit()
@@ -103,13 +109,13 @@ class Bbs1App(Gtk.Application):
 
         # Destroy any previous device
         try:
-            self.dev.__del__()
+            self.device.__del__()
         except AttributeError:
             # self.dev may not exist. This is not an issue: keep going
             pass
 
         try:
-            self.dev = device.Bbs1(self.com)
+            self.device = device.Bbs1(self.com)
         except IOError:
             self.msg_print("BBS-1 not found")
             self.show_alert_init()
@@ -119,19 +125,20 @@ class Bbs1App(Gtk.Application):
 
     def show_alert_init(self):
         """Show an alert reporting failed device initialization"""
-        if self.init_alert.run() == -5:  # OK button
-            self.init_alert.hide()
+        init_alert = self.builder.get_object('init_alert')
+        if init_alert.run() == -5:  # OK button
+            init_alert.hide()
             self.init_communication()
         else:
             self.quit()
 
     def connect_device(self):
         """Connect to the device"""
-        if self.dev.present():
-            mode = self.dev.get_mode()
+        if self.device.present():
+            mode = self.device.get_mode()
             self.msg_print("BSS-1 connected!")
-            self.hw_vers.set_text(self.dev.get_hardware_version())
-            self.fw_vers.set_text(self.dev.get_firmware_version())
+            self.hw_vers.set_text(self.device.get_hardware_version())
+            self.fw_vers.set_text(self.device.get_firmware_version())
             if mode == 'normal':
                 self.normal()
             else:
@@ -142,8 +149,9 @@ class Bbs1App(Gtk.Application):
 
     def show_alert_connect(self):
         """Show an alert reporting failed device communication"""
-        if self.connect_alert.run() == -5:  # OK button
-            self.connect_alert.hide()
+        connect_alert = self.builder.get_object('connect_alert')
+        if connect_alert.run() == -5:  # OK button
+            connect_alert.hide()
             self.init_communication()
         else:
             self.quit()
@@ -159,6 +167,7 @@ class Bbs1App(Gtk.Application):
         raise NotImplementedError
 
     def on_menu_about_clicked(self, menuitem, data=None):
+        """Show the about dialog"""
         about_dialog = self.builder.get_object("about_dialog")
         about_dialog.run()
         about_dialog.hide()
