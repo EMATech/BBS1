@@ -29,17 +29,22 @@ except ImportError:
 
 class Bbs1App(Gtk.Application):
     """BBS1 main GUI application"""
+    
     def __init__(self):
         """Application initialization"""
         Gtk.Application.__init__(self, application_id='apps.bbs1',
                                  flags=Gio.ApplicationFlags.FLAGS_NONE)
+
+        # Glade
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file('bbs1.glade')
+
+        # Signals
+        self.builder.connect_signals(self)
         self.connect('activate', self.on_activate)
 
     def on_activate(self, data=None):
         """Secondary initialization"""
-        # Glade
-        self.builder = Gtk.Builder()
-        self.builder.add_from_file('bbs1.glade')
 
         # Main window
         self.window = self.builder.get_object('BBS1')
@@ -152,3 +157,8 @@ class Bbs1App(Gtk.Application):
         """Firmware mode handling"""
         # TODO
         raise NotImplementedError
+
+    def on_menu_about_clicked(self, menuitem, data=None):
+        about_dialog = self.builder.get_object("about_dialog")
+        about_dialog.run()
+        about_dialog.hide()

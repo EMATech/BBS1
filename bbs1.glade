@@ -1,63 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 
+
+Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
+
+This file is part of BBS1.
+
+BBS1 is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+BBS1 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with BBS1.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Raphaël Doursenaud <rdoursenaud@free.fr>
+
+-->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkAction" id="action1">
-    <property name="label" translatable="yes">Clear all</property>
-    <property name="stock_id">gtk-delete</property>
-  </object>
-  <object class="GtkAction" id="action2">
-    <property name="label" translatable="yes">New</property>
-    <property name="stock_id">gtk-new</property>
-  </object>
-  <object class="GtkAction" id="action3">
-    <property name="label" translatable="yes">Open</property>
-    <property name="stock_id">gtk-open</property>
-  </object>
-  <object class="GtkAction" id="action4">
-    <property name="label" translatable="yes">Save as</property>
-    <property name="stock_id">gtk-save-as</property>
-  </object>
-  <object class="GtkAction" id="action5">
-    <property name="label" translatable="yes">Apply</property>
-    <property name="stock_id">gtk-apply</property>
-  </object>
-  <object class="GtkAction" id="action6">
-    <property name="label" translatable="yes">About</property>
-    <property name="stock_id">gtk-help</property>
-  </object>
-  <object class="GtkAboutDialog" id="aboutdialog1">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">About</property>
-    <property name="type_hint">dialog</property>
-    <property name="program_name">BBS1</property>
-    <property name="version">Development version</property>
-    <property name="copyright" translatable="yes">©2012 EMA Tech.</property>
-    <property name="website">github.com/EMATech/BBS1</property>
-    <property name="website_label" translatable="yes">Github</property>
-    <property name="license" translatable="yes">GPLv3</property>
-    <property name="authors">Raphaël Doursenaud</property>
-    <property name="license_type">gpl-3-0</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="aboutdialog-vbox1">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="aboutdialog-action_area1">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
+  <requires lib="gtk+" version="3.6"/>
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name BBS1 -->
+  <!-- interface-copyright 2012-2015 Rapha\303\253l Doursenaud <rdoursenaud@free.fr> -->
+  <!-- interface-authors Rapha\303\253l Doursenaud <rdoursenaud@free.fr> -->
   <object class="GtkAdjustment" id="adjustment1">
     <property name="upper">8</property>
     <property name="step_increment">1</property>
@@ -108,12 +77,9 @@
             <property name="can_focus">False</property>
             <property name="toolbar_style">both</property>
             <child>
-              <object class="GtkToolButton" id="New">
-                <property name="related_action">action2</property>
+              <object class="GtkToolButton" id="menu_new">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">toolbutton1</property>
-                <property name="use_underline">True</property>
                 <property name="stock_id">gtk-new</property>
               </object>
               <packing>
@@ -122,12 +88,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton2">
-                <property name="related_action">action3</property>
+              <object class="GtkToolButton" id="menu_open">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">toolbutton2</property>
-                <property name="use_underline">True</property>
                 <property name="stock_id">gtk-open</property>
               </object>
               <packing>
@@ -136,12 +99,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton3">
-                <property name="related_action">action4</property>
+              <object class="GtkToolButton" id="menu_save_as">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">toolbutton3</property>
-                <property name="use_underline">True</property>
                 <property name="stock_id">gtk-save-as</property>
               </object>
               <packing>
@@ -150,12 +110,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton1">
-                <property name="related_action">action1</property>
+              <object class="GtkToolButton" id="menu_clear_all">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">toolbutton1</property>
-                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-delete</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -163,12 +121,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton4">
-                <property name="related_action">action5</property>
+              <object class="GtkToolButton" id="menu_apply">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">toolbutton4</property>
-                <property name="use_underline">True</property>
                 <property name="stock_id">gtk-apply</property>
               </object>
               <packing>
@@ -177,7 +132,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSeparatorToolItem" id="toolbutton6">
+              <object class="GtkSeparatorToolItem" id="menu_separator">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
               </object>
@@ -187,13 +142,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton5">
-                <property name="use_action_appearance">False</property>
-                <property name="related_action">action6</property>
+              <object class="GtkToolButton" id="menu_about">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">About</property>
-                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-about</property>
+                <signal name="clicked" handler="on_menu_about_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -222,8 +175,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -235,8 +186,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -248,8 +197,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -261,8 +208,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -274,8 +219,6 @@
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -287,8 +230,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -300,8 +241,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -313,8 +252,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -326,8 +263,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -339,8 +274,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -352,8 +285,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -365,8 +296,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -378,8 +307,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -391,8 +318,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -405,8 +330,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -419,8 +342,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -433,8 +354,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -447,8 +366,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -461,8 +378,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -475,8 +390,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -489,8 +402,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -503,8 +414,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -517,8 +426,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -536,8 +443,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -548,8 +453,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -560,8 +463,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -572,8 +473,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -584,8 +483,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -596,8 +493,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -608,8 +503,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -620,8 +513,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -632,8 +523,6 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -644,132 +533,103 @@
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkFileChooserButton" id="filechooserbutton9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button3">
                 <property name="label">gtk-delete</property>
                 <property name="use_action_appearance">False</property>
-                <property name="related_action">action1</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -778,13 +638,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button5">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -793,13 +652,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button6">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -808,13 +666,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button7">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -823,13 +680,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button8">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -838,13 +694,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button9">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -853,13 +708,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button10">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -868,13 +722,12 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button11">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -883,8 +736,6 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -893,7 +744,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment2</property>
@@ -903,8 +753,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -913,7 +761,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment3</property>
@@ -923,8 +770,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -933,7 +778,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment4</property>
@@ -943,8 +787,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -953,7 +795,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment5</property>
@@ -963,8 +804,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -973,7 +812,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment6</property>
@@ -983,8 +821,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -993,7 +829,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment7</property>
@@ -1003,8 +838,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1013,7 +846,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment8</property>
@@ -1023,8 +855,6 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1033,7 +863,6 @@
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
                 <property name="caps_lock_warning">False</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment9</property>
@@ -1043,13 +872,12 @@
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="button4">
-                <property name="related_action">action1</property>
+                <property name="label">gtk-delete</property>
+                <property name="related_action"/>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1058,8 +886,6 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1074,8 +900,6 @@
               <packing>
                 <property name="left_attach">5</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1183,6 +1007,40 @@
       </object>
     </child>
   </object>
+  <object class="GtkAboutDialog" id="about_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">About</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">BBS1</property>
+    <property name="program_name">BBS1</property>
+    <property name="version">Development version</property>
+    <property name="copyright" translatable="yes">©2012-2015 EMA Tech.</property>
+    <property name="website">https://github.com/EMATech/BBS1</property>
+    <property name="website_label" translatable="yes">Github</property>
+    <property name="authors">Raphaël Doursenaud</property>
+    <property name="logo_icon_name">applications-system</property>
+    <property name="license_type">gpl-3-0</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="aboutdialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="aboutdialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkMessageDialog" id="comm_alert">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -1191,6 +1049,7 @@
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">BBS1</property>
     <property name="message_type">error</property>
     <property name="buttons">ok-cancel</property>
     <property name="text" translatable="yes">MIDI initialization failed!</property>
@@ -1229,6 +1088,7 @@ Do you want to try again?</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">BBS1</property>
     <property name="message_type">warning</property>
     <property name="buttons">ok-cancel</property>
     <property name="text" translatable="yes">BBS-1 not responding!</property>
@@ -1265,12 +1125,12 @@ Do you want to try again?</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">BBS1</property>
     <property name="message_type">error</property>
     <property name="buttons">ok-cancel</property>
     <property name="text" translatable="yes">BBS-1 not found!</property>
     <property name="secondary_text" translatable="yes">Please check it is properly connected and powered up.
 Do you want to try again?</property>
-    <signal name="response" handler="init_device()" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="messagedialog-vbox">
         <property name="can_focus">False</property>
