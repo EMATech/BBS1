@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# TODO: GUI toolbar or menu
-# TODO: About dialog
 # TODO: Firmware update wizard
 # TODO: Check for firmware update online
 # TODO: Display tempo map usage

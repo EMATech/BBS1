@@ -1,4 +1,4 @@
-bbs1
+BBS1
 ====
 A tool to communicate with Peterson's BBS-1 metronome
 
@@ -24,7 +24,6 @@ Implemented
 
 Todo
 ----
-- About dialog
 - Send firmware update
 - Check for firmware update
 - Extract tempo maps
