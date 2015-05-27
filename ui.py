@@ -83,7 +83,7 @@ class Bbs1App(Gtk.Application):
 
         try:
             self.com = communication.Communication()
-        except Exception:
+        except IOError:
             self.msg_print("Failed to initialize communication")
             self.show_alert_communication()
         else:
