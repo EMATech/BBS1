@@ -19,7 +19,7 @@
 import sysex
 
 
-class Bbs1:
+class Bbs1(object):
     """BBS1 device and associated commands"""
     __hw_vers = "unknown"
     __fw_vers = "unknown"

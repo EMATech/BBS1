@@ -20,13 +20,14 @@ import logging
 import re
 
 try:
+    # noinspection PyUnresolvedReferences
     from pygame import midi
 except ImportError:
     print("This script needs pygame to run")
     raise
 
 
-class Communication:
+class Communication(object):
     """MIDI communication"""
     midi_in = None
     midi_out = None
