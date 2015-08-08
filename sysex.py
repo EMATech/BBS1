@@ -16,39 +16,46 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-##
-# General Format
-##
+"""
+BBS1 SysEx protocol
+===================
 
-# [start][man_ID1][man_ID2 ][man_ID3][device_ID][command][reserved]
-#    [payload.. max  40 bytes..][end]
-# where:
-# [payload] = [ 5 command bytes]
-#    [ 2 - 35 encoded data bytes = 7 raw words = 28 raw bytes]
-# 5 command bytes = [payload command] [ packet ID top byte 0-7F]
-#    [ packet ID low byte 0-7F] [ reserved] [reserved]
-# INT16u packetID = (packet ID top byte << 7) | packet ID low byte ;
-#    packetID 0x3FFF indicates last packet
+General Format
+--------------
 
-# Data formats
+::
+[start][man_ID1][man_ID2 ][man_ID3][device_ID][command][reserved]
+   [payload.. max  40 bytes..][end]
+where:
+[payload] = [ 5 command bytes]
+   [ 2 - 35 encoded data bytes = 7 raw words = 28 raw bytes]
+5 command bytes = [payload command] [ packet ID top byte 0-7F]
+   [ packet ID low byte 0-7F] [ reserved] [reserved]
+INT16u packetID = (packet ID top byte << 7) | packet ID low byte ;
+   packetID 0x3FFF indicates last packet
 
-# INT16u (to a max 0x3FFF) will be packed in 2 bytes:
-#    top byte << 7) | low byte
-# INT32u will be packed in 5 bytes:
-#    [0000 topbit byte1, topbit byte 2, topbit byte 3 , topbit byte 4]
-#        [ byte1] [byte2][byte3][byte4]
+Data formats
+~~~~~~~~~~~~
 
-##
-# Notes
-##
-# Firmware transfer sequence of events:
+::
+INT16u (to a max 0x3FFF) will be packed in 2 bytes:
+   top byte << 7) | low byte
+INT32u will be packed in 5 bytes:
+   [0000 topbit byte1, topbit byte 2, topbit byte 3 , topbit byte 4]
+       [ byte1] [byte2][byte3][byte4]
 
-# for each page till complete:
-#    CMD_PREPARE_FOR_FIRMWARE_PAGE will be sent
-#    data  = [INT16u page id]  [INT16u totalbytes] [INT32u checksum]  9 bytes
-#    NO ack required ?
-#    CMD_SENDING_FIRMWARE_PAGE
-#    Ack required.
+Notes
+-----
+Firmware transfer sequence of events:
+
+::
+for each page till complete:
+   CMD_PREPARE_FOR_FIRMWARE_PAGE will be sent
+   data  = [INT16u page id]  [INT16u totalbytes] [INT32u checksum]  9 bytes
+   NO ack required ?
+   CMD_SENDING_FIRMWARE_PAGE
+   Ack required.
+"""
 
 ##
 # Basics
