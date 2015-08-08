@@ -31,6 +31,7 @@ Todo
 - Tempo map wizard
 - i18n (getext)
 - Wireless protocol
+- Support having multiple BBS1 connected
 
 Dependencies
 ------------
