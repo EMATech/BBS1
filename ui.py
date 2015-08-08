@@ -20,7 +20,7 @@ import communication
 import device
 
 try:
-    # noinspection PyPackageRequirements
+    # noinspection PyPackageRequirements,PyUnresolvedReferences
     from gi.repository import Gtk, Gio
 except ImportError:
     print("This script needs pygobject to run")

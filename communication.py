@@ -49,9 +49,12 @@ class Communication(object):
         # Search for the first BodyBeatSync input and output ports
         for i in range(0, devices):
             info = midi.get_device_info(i)
+            # Name
             if re.match('.*BodyBeatSYNC MIDI 1.*', str(info[1])):
+                # Input
                 if info[2] >= 1:
                     dev_in = i
+                # Output
                 if info[3] >= 1:
                     dev_out = i
 
