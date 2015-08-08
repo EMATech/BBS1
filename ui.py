@@ -136,7 +136,7 @@ class Bbs1App(Gtk.Application):
         """Connect to the device"""
         if self.device.present():
             mode = self.device.get_mode()
-            self.msg_print("BSS-1 connected!")
+            self.msg_print("BSS-1 connected! (" + mode + " mode)")
             self.hw_vers.set_text(self.device.get_hardware_version())
             self.fw_vers.set_text(self.device.get_firmware_version())
             if mode == 'normal':
