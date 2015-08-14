@@ -185,5 +185,13 @@ class Bbs1App(Gtk.Application):
 
     def refresh(self):
         """Refresh UI informations"""
-        self.device.get_tempomaps()
+        tempofile = self.device.get_tempomaps()
         # TODO: fill UI components
+        for i in range(0, tempofile.maps_count):
+            igtk = str(i + 1)
+            entryname = 'entry' + igtk
+            self.builder.get_object(entryname).set_text(tempofile.maps[i].name)
+            spinbuttonname = 'spinbutton' + igtk
+            self.builder.get_object(spinbuttonname).set_value(tempofile.maps[i].count_in)
+            switchname = 'switch' +igtk
+            self.builder.get_object(switchname).set_state(tempofile.maps[i].looping)

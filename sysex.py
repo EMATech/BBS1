@@ -483,7 +483,7 @@ class SysexMessage(object):
         Infos
         ~~~~~
 
-        20 to 24 bytes
+        20 to 24 bytes repeated as needed
 
         ::
         bytes 0-1
@@ -505,7 +505,8 @@ class SysexMessage(object):
 
         4 bytes
 
-        Repeated as much as needed (see start offset and length)
+        Repeated as needed
+        See info start offset and length
 
         ::
         byte 0
@@ -542,7 +543,7 @@ class SysexMessage(object):
 
         SysexMessage._parse_bars(maps[index:])
 
-        return NotImplemented
+        return tempofile
 
     @staticmethod
     def _parse_file_header(header, tempofile):
@@ -587,7 +588,7 @@ class SysexMessage(object):
             logging.debug("Parsing map #" + str(i))
             (inc, tempomap) = SysexMessage._parse_map(maps_data[index:], tempofile)
             index += inc
-            tempofile.add_map(tempomap)
+            tempofile.maps[i] = tempomap
 
         return index
 

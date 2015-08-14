@@ -88,8 +88,9 @@ class Bbs1(object):
         # 8 pages seem to be the minimum when the device is cleared
         # Biggest pages: 39 bytes
 
-        # TODO: decode tempo maps pages
-        SysexMessage.parse_tempo_maps_pages(tm)
+        tempofile = SysexMessage.parse_tempo_maps_pages(tm)
+
+        return tempofile
 
     def clear_tempomaps(self):
         logging.debug("Clear tempo maps")
