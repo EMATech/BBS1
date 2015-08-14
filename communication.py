@@ -105,12 +105,17 @@ class Communication(object):
         """
         self.send(msg)
 
+        answers = []
         while number:
             number -= 1
             logging.debug("<-")
             answer = self._wait_for_data()
+            answers.append(answer)
 
-        return answer
+        if len(answers) == 1:
+            return answer
+
+        return answers
 
     def _wait_for_data(self):
         # Wait for answer
