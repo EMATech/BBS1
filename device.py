@@ -18,6 +18,7 @@
 
 import sysex
 import logging
+from sysex import SysexMessage
 
 
 class Bbs1(object):
@@ -44,7 +45,7 @@ class Bbs1(object):
     def present(self):
         """Tests if the hardware is present and if communication is possible"""
         logging.debug("Hardware Present?")
-        reply = self.com.get_data(sysex.MSG_CONNECTED)
+        reply = self.com.get_data(SysexMessage.build_msg_req_con())
         if reply == ('ok', 'connected'):
             return True
         return False
@@ -52,7 +53,7 @@ class Bbs1(object):
     def get_mode(self):
         """Gets the current mode (Normal/Firmware upload)"""
         logging.debug("Get mode?")
-        reply = self.com.get_data(sysex.MSG_MODE)
+        reply = self.com.get_data(SysexMessage.build_msg_req_mode())
         if reply[0] == 'ok':
             return reply[1]
         else:
@@ -69,11 +70,11 @@ class Bbs1(object):
     def get_hardware_version(self):
         """Returns the hardware version in human readable form"""
         logging.debug("Get HW version?")
-        self.__hw_vers = self._get_version(sysex.MSG_HW_VERS)
+        self.__hw_vers = self._get_version(SysexMessage.build_msg_req_hw_vers())
         return self.__hw_vers
 
     def get_firmware_version(self):
         """Returns the firmware version in human readable form"""
         logging.debug("Get FW version?")
-        self.__fw_vers = self._get_version(sysex.MSG_FW_VERS)
+        self.__fw_vers = self._get_version(SysexMessage.build_msg_req_fw_vers())
         return self.__fw_vers

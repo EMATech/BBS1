@@ -136,85 +136,112 @@ _DEL_TM = 0x24
 _VKEY = 0x40
 _VENC = 0x41
 
-#### FIXME: class methods
-##
-# Helpers
-##
-
-# Preamble
-_PREAMBLE = [_SYX_START, _MAN_ID1, _MAN_ID2, _MAN_ID3, _DEV_ID]
-
-# Command
-## Unused
-_SEND_COMMAND = _PREAMBLE[:]
-_SEND_COMMAND.append(_CMD)
-_SEND_COMMAND.append(_RESERVED)
-
-# Data
-_SEND_DATA = _PREAMBLE[:]
-_SEND_DATA.append(_DATA)
-_SEND_DATA.append(_RESERVED)
-
-# Connected
-MSG_CONNECTED = _SEND_DATA[:]
-MSG_CONNECTED.append(_REQ_CON)
-## Unused 4 bytes ignored
-MSG_CONNECTED.append(_SYX_END)
-
-ANS_CONNECTED = _PREAMBLE[:]
-ANS_CONNECTED.append(_ACK_OK)
-ANS_CONNECTED.append(_RESERVED)
-ANS_CONNECTED.append(_ACK_CON)
-ANS_CONNECTED.append(_SYX_END)
-
-# Mode
-MSG_MODE = _SEND_DATA[:]
-MSG_MODE.append(_REQ_MODE)
-## Unused 4 bytes ignored
-MSG_MODE.append(_SYX_END)
-
-_ANS_MODE_TYPE = _PREAMBLE[:]
-_ANS_MODE_TYPE.append(_ACK_OK)
-_ANS_MODE_TYPE.append(_RESERVED)
-_ANS_MODE_TYPE.append(_ANS_MODE)
-
-ANS_NORMAL_MODE = _ANS_MODE_TYPE[:]
-ANS_NORMAL_MODE.append(0x00)
-ANS_NORMAL_MODE.append(_SYX_END)
-
-ANS_FW_MODE = _ANS_MODE_TYPE[:]
-ANS_FW_MODE.append(0x01)
-ANS_FW_MODE.append(_SYX_END)
-
-# Hardware version
-MSG_HW_VERS = _SEND_DATA[:]
-MSG_HW_VERS.append(_REQ_HW_VERS)
-## Unused 4 bytes ignored
-MSG_HW_VERS.append(_SYX_END)
-
-# Firmware version
-MSG_FW_VERS = _SEND_DATA[:]
-MSG_FW_VERS.append(_REQ_FW_VERS)
-## Unused 4 bytes ignored
-MSG_FW_VERS.append(_SYX_END)
-
-# Get tempo map infos
-MSG_TM_INFOS = _SEND_DATA[:]
-MSG_TM_INFOS.append(_REQ_TM)
-## Unused 4 bytes ignored
-MSG_TM_INFOS.append(_SYX_END)
-
-# Get actual tempo maps
-MSG_TEMPOMAPS = _SEND_DATA[:]
-MSG_TEMPOMAPS.append(_ACK_ERR)
-MSG_TEMPOMAPS.append(0x7f)  # TODO: decode
-MSG_TEMPOMAPS.append(0x7f)  # TODO: decode
-## Unused 2 bytes ignored
-MSG_TEMPOMAPS.append(_SYX_END)
-
-
 class SysexMessage(object):
     """BBS1 System exclusive message"""
+
+
+    @staticmethod
+    def _build_msg_preamble():
+        """
+        Build BBS1 SysEx message preamble
+        """
+        return [_SYX_START, _MAN_ID1, _MAN_ID2, _MAN_ID3, _DEV_ID]
+
+    @staticmethod
+    def _build_msg_send_command():
+        """
+        Start BBS1 send command message
+
+        Note: this seem to never work
+        """
+        message = SysexMessage._build_msg_preamble()[:]
+        message.append(_CMD)
+        message.append(_RESERVED)
+        return message
+
+    @staticmethod
+    def _build_msg_send_data():
+        """
+        Start BBS1 send data message
+        """
+        message = SysexMessage._build_msg_preamble()[:]
+        message.append(_DATA)
+        message.append(_RESERVED)
+        return message
+
+    @staticmethod
+    def build_msg_req_con():
+        """
+        Build a request connection status message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(_REQ_CON)
+        # Unused 4 padding bytes ignored
+        message.append(_SYX_END)
+        return message
+
+    @staticmethod
+    def build_msg_req_mode():
+        """
+        Build a request mode status message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(_REQ_MODE)
+        # Unused 4 padding bytes ignored
+        message.append(_SYX_END)
+        return message
+
+    @staticmethod
+    def build_msg_req_hw_vers():
+        """
+        Build a request hardware version message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(_REQ_HW_VERS)
+        # Unused 4 padding bytes ignored
+        message.append(_SYX_END)
+        return message
+
+    @staticmethod
+    def build_msg_req_fw_vers():
+        """
+        Build a request firmware version message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(_REQ_FW_VERS)
+        # Unused 4 padding bytes ignored
+        message.append(_SYX_END)
+        return message
+
+    @staticmethod
+    def build_msg_req_tm_infos():
+        """
+        Build a request tempo maps informations message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(_REQ_TM)
+        # Unused 4 padding bytes ignored
+        message.append(_SYX_END)
+        return message
+
+    @staticmethod
+    def build_msg_req_tm():
+        """
+        Build a request tempo maps message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(0x00)  # BBS1 happily sends data whatever this value is
+        message.append(0x7f)  # TODO: decode
+        message.append(0x7f)  # TODO: decode
+        # Unused 2 padding bytes ignored
+        message.append(_SYX_END)
+        return message
 
     @staticmethod
     def parse(message):
