@@ -171,3 +171,8 @@ class Bbs1App(Gtk.Application):
         about_dialog = self.builder.get_object("about_dialog")
         about_dialog.run()
         about_dialog.hide()
+
+    def on_menu_clear_all_clicked(self, menuitem, data=None):
+        """Clear all tempo maps"""
+        self.device.clear_tempomaps()
+        # TODO: refresh free space

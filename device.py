@@ -78,3 +78,7 @@ class Bbs1(object):
         logging.debug("Get FW version?")
         self.__fw_vers = self._get_version(SysexMessage.build_msg_req_fw_vers())
         return self.__fw_vers
+
+    def clear_tempomaps(self):
+        logging.debug("Clear tempo maps")
+        self.com.send(SysexMessage.build_msg_del_tm())
