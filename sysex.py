@@ -25,24 +25,24 @@ General Format
 
 ::
 [start][man_ID1][man_ID2 ][man_ID3][device_ID][command][reserved]
-   [payload.. max  40 bytes..][end]
+    [payload.. max  40 bytes..][end]
 where:
 [payload] = [ 5 command bytes]
-   [ 2 - 35 encoded data bytes = 7 raw words = 28 raw bytes]
+    [ 2 - 35 encoded data bytes = 7 raw words = 28 raw bytes]
 5 command bytes = [payload command] [ packet ID top byte 0-7F]
-   [ packet ID low byte 0-7F] [ reserved] [reserved]
+    [ packet ID low byte 0-7F] [ reserved] [reserved]
 INT16u packetID = (packet ID top byte << 7) | packet ID low byte ;
-   packetID 0x3FFF indicates last packet
+    packetID 0x3FFF indicates last packet
 
 Data formats
 ~~~~~~~~~~~~
 
 ::
 INT16u (to a max 0x3FFF) will be packed in 2 bytes:
-   top byte << 7) | low byte
+    top byte << 7) | low byte
 INT32u will be packed in 5 bytes:
-   [0000 topbit byte1, topbit byte 2, topbit byte 3 , topbit byte 4]
-       [ byte1] [byte2][byte3][byte4]
+    [0000 topbit byte1, topbit byte 2, topbit byte 3 , topbit byte 4]
+        [ byte1] [byte2][byte3][byte4]
 
 Notes
 -----
@@ -66,10 +66,11 @@ _SYX_END = 0xf7
 ##
 # IDs
 ##
+# Manufacturer
 _MAN_ID1 = 0x00
 _MAN_ID2 = 0x40
 _MAN_ID3 = 0x70
-
+# Device
 _DEV_ID = 0x01
 
 ##
