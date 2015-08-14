@@ -300,6 +300,9 @@ class SysexMessage(object):
         if data[0] != _RESERVED:
             logging.warning("Unknown SysEx message payload reserved field")
 
+        if len(data) == 1:
+            return
+
         # Requests
         if data[1] == _REQ_NEXT_FW_PG:
             logging.debug("Request next firware page")
