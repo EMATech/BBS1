@@ -18,6 +18,7 @@
 
 import logging
 import re
+from sysex import SysexMessage
 
 try:
     # noinspection PyUnresolvedReferences
@@ -83,20 +84,35 @@ class Communication(object):
         :param msg: Message
         :type msg: str
         """
+
+        logging.debug("->")
+        SysexMessage.parse(msg)  # FIXME: debugging
+
         try:
             self.midi_out.write_sys_ex(0, msg)
         except TypeError:
             # We must be running Python 3, let's send bytes
             self.midi_out.write_sys_ex(0, bytes(msg))
 
-    def get_data(self, msg):
+    # TODO: replace length by a callback function to compute it from returned ack message
+    def get_data(self, msg, number=1):
         """Gets reply from the hardware after sending a message
 
         :param msg: Message
         :type msg: str
+        :param number: Number of SysEx messages replies expected
+        :type number: int
         """
         self.send(msg)
 
+        while number:
+            number -= 1
+            logging.debug("<-")
+            answer = self._wait_for_data()
+
+        return answer
+
+    def _wait_for_data(self):
         # Wait for answer
         while not self.midi_in.poll():
             pass
@@ -116,7 +132,6 @@ class Communication(object):
                     if data == 0xf7:
                         break
 
-        # TODO: Check answer
         # TODO: Timeout on no reply
 
-        return answer
+        return SysexMessage.parse(answer)

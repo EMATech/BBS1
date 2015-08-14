@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sysex
+import logging
 
 
 class Bbs1(object):
@@ -42,34 +43,37 @@ class Bbs1(object):
 
     def present(self):
         """Tests if the hardware is present and if communication is possible"""
+        logging.debug("Hardware Present?")
         reply = self.com.get_data(sysex.MSG_CONNECTED)
-        if reply == sysex.ANS_CONNECTED:
+        if reply == ('ok', 'connected'):
             return True
         return False
 
     def get_mode(self):
         """Gets the current mode (Normal/Firmware upload)"""
+        logging.debug("Get mode?")
         reply = self.com.get_data(sysex.MSG_MODE)
-        if reply == sysex.ANS_NORMAL_MODE:
-            return 'normal'
-        elif reply == sysex.ANS_FW_MODE:
-            return 'firmware update'
+        if reply[0] == 'ok':
+            return reply[1]
         else:
-            raise Warning("Unexpected mode reply received : " + reply)
+            raise Warning
 
     def _get_version(self, part):
         """Returns the version in human readable form"""
-        raw_version = self.com.get_data(part)
-        version = str(raw_version[12]) + '.'\
-            + str(raw_version[14]) + '.' + str(raw_version[16])
-        return version
+        reply = self.com.get_data(part)
+        if reply[0] == 'ok':
+            return reply[1]
+        else:
+            raise Warning
 
     def get_hardware_version(self):
         """Returns the hardware version in human readable form"""
+        logging.debug("Get HW version?")
         self.__hw_vers = self._get_version(sysex.MSG_HW_VERS)
         return self.__hw_vers
 
     def get_firmware_version(self):
         """Returns the firmware version in human readable form"""
+        logging.debug("Get FW version?")
         self.__fw_vers = self._get_version(sysex.MSG_FW_VERS)
         return self.__fw_vers
