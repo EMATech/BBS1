@@ -1,7 +1,7 @@
 # -*- coding: utf-8 *-*
 """BBS1 MIDI SysEx protocol definitions"""
 # A tool to communicate with Peterson's BBS-1 metronome
-# Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
+# Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 import logging
 from binascii import hexlify
+import tempo
 
 """
 BBS1 SysEx protocol
@@ -99,7 +100,6 @@ _TX_FW_PG = 0x03
 # From BBS
 _FW_TX_CMP = 0x04
 
-
 # Version formats x.xx.xx sent as bytes not chars
 
 # Hardware version
@@ -139,7 +139,6 @@ _VENC = 0x41
 class SysexMessage(object):
     """BBS1 System exclusive message"""
 
-
     @staticmethod
     def _build_msg_preamble():
         """
@@ -154,7 +153,7 @@ class SysexMessage(object):
 
         Note: this seem to never work
         """
-        message = SysexMessage._build_msg_preamble()[:]
+        message = SysexMessage._build_msg_preamble()
         message.append(_CMD)
         message.append(_RESERVED)
         return message
@@ -164,7 +163,7 @@ class SysexMessage(object):
         """
         Start send data message
         """
-        message = SysexMessage._build_msg_preamble()[:]
+        message = SysexMessage._build_msg_preamble()
         message.append(_DATA)
         message.append(_RESERVED)
         return message
@@ -174,7 +173,7 @@ class SysexMessage(object):
         """
         Start send acknowlege OK
         """
-        message = SysexMessage._build_msg_preamble()[:]
+        message = SysexMessage._build_msg_preamble()
         message.append(_ACK_OK)
         message.append(_RESERVED)
         return message
@@ -184,7 +183,7 @@ class SysexMessage(object):
         """
         Start send acknowlege error
         """
-        message = SysexMessage._build_msg_preamble()[:]
+        message = SysexMessage._build_msg_preamble()
         message.append(_ACK_ERR)
         message.append(_RESERVED)
         return message
@@ -194,7 +193,7 @@ class SysexMessage(object):
         """
         Build a request tempo maps message
         """
-        message = SysexMessage._build_msg_send_ack_ok()[:]  # BBS1 happily sends data whatever the message type
+        message = SysexMessage._build_msg_send_ack_ok()  # BBS1 happily sends data whatever the message type
         message.append(_SYX_END)
         return message
 
@@ -204,7 +203,7 @@ class SysexMessage(object):
         Build a delete tempo maps message
         """
         # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
+        message = SysexMessage._build_msg_send_data()
         message.append(_DEL_TM)
         message.append(_SYX_END)
         return message
@@ -215,7 +214,7 @@ class SysexMessage(object):
         Build a request connection status message
         """
         # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
+        message = SysexMessage._build_msg_send_data()
         message.append(_REQ_CON)
         # Unused 4 padding bytes ignored
         message.append(_SYX_END)
@@ -227,7 +226,7 @@ class SysexMessage(object):
         Build a request mode status message
         """
         # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
+        message = SysexMessage._build_msg_send_data()
         message.append(_REQ_MODE)
         # Unused 4 padding bytes ignored
         message.append(_SYX_END)
@@ -239,7 +238,7 @@ class SysexMessage(object):
         Build a request hardware version message
         """
         # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
+        message = SysexMessage._build_msg_send_data()
         message.append(_REQ_HW_VERS)
         # Unused 4 padding bytes ignored
         message.append(_SYX_END)
@@ -251,7 +250,7 @@ class SysexMessage(object):
         Build a request firmware version message
         """
         # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
+        message = SysexMessage._build_msg_send_data()
         message.append(_REQ_FW_VERS)
         # Unused 4 padding bytes ignored
         message.append(_SYX_END)
@@ -263,7 +262,7 @@ class SysexMessage(object):
         Build a request tempo maps informations message
         """
         # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
+        message = SysexMessage._build_msg_send_data()
         message.append(_REQ_TM)
         # Unused 4 padding bytes ignored
         message.append(_SYX_END)
@@ -283,11 +282,9 @@ class SysexMessage(object):
         if start != _SYX_START or end != _SYX_END:
             raise TypeError("Not a valid SysEx message")
 
-        man_id_1 = message[1]
-        man_id_2 = message[2]
-        man_id_3 = message[3]
+        man_id = message[1:4]
 
-        if man_id_1 != _MAN_ID1 or man_id_2 != _MAN_ID2 or man_id_3 != _MAN_ID3:
+        if man_id != [_MAN_ID1, _MAN_ID2, _MAN_ID3]:
             raise TypeError("Wrong manufacturer")
 
         dev_id = message[4]
@@ -325,6 +322,7 @@ class SysexMessage(object):
         """
         if data[0] != _RESERVED:
             logging.warning("Unknown SysEx message payload reserved field")
+        # 0x23 seem to be used for tempo maps pages
 
         if len(data) == 1:
             return
@@ -340,7 +338,7 @@ class SysexMessage(object):
             logging.debug("Request firmware version")
             return
         elif data[1] == _REQ_TM:
-            logging.debug("Request tempo map informations")
+            logging.debug("Request tempo maps")
             return
         elif data[1] == _REQ_CON:
             logging.debug("Request connection status")
@@ -358,15 +356,19 @@ class SysexMessage(object):
         elif data[1] == _FW_PG:
             logging.debug("Firmware page")
             # TODO: code/decode
+            return
         elif data[1] == _TX_FW_PG:
             logging.debug("Transmit firware page")
             # TODO: code/decode
+            return
         elif data[1] == _TX_TM_PG:
             logging.debug("Transmit tempo map page")
             # TODO: code/decode
+            return
         elif data[1] == _TM_PG:
             logging.debug("Tempo map page")
             # TODO: code/decode
+            return data[2:]
 
         # Answers
         elif data[1] == _FW_TX_CMP:
@@ -422,3 +424,248 @@ class SysexMessage(object):
         logging.debug("Mode: " + mode)
 
         return mode
+
+    @staticmethod
+    def parse_tempo_maps_pages(result):
+
+        logging.debug("Parse tempo maps pages")
+
+        """
+        Tempo maps format
+        =================
+
+        IMPORTANT NOTE: wire protocol introduce 1 padding byte after every 4 bytes
+
+        Pages
+        -----
+
+        5 bytes
+
+        ::
+        byte 0
+            [0] => page
+            [127] => last page
+        byte 1
+            [0-126] => page #
+            [127] => last page
+        bytes 2-4
+            [0, 0, 0] padding?
+
+        if page == 0:
+            bytes 5-12
+                Header data
+        bytes n-n'
+            Entries data
+
+        Header
+        ------
+
+        8 bytes
+
+        ::
+        bytes 0-2
+            "BBS" magic number
+        byte 3
+            [?] Version? 0x01 or 0x02
+        bytes 4-5
+            [LSB, MSB] file size in bytes
+        byte 6
+            [9] Number of tempo maps entries (Should be <= 9)
+        byte 7
+            [0] Padding
+
+        Entry format
+        ------------
+
+        Up to 9 entries can be stored
+
+
+        Infos
+        ~~~~~
+
+        20 to 24 bytes
+
+        ::
+        bytes 0-1
+            [MSB, LSB] Start offset?
+        bytes 2-3
+            [MSB, LSB] bars length in bytes
+        byte 4-19
+            Name 16 bytes
+        if version == 2:
+            byte 20
+                [?] Count-in bars
+                    Top bit: looping flag
+                    Lower bits: number of bars to count-in (0-8)
+            byte 21-23
+                padding!
+
+        Bars
+        ~~~~
+
+        4 bytes
+
+        Repeated as much as needed (see start offset and length)
+
+        ::
+        byte 0
+            [?] Time signature
+                Top 4 bits: beats per bar (1-16)
+                Lower bits: beat value (2, 4, 8, 16 or 32)
+        byte 1
+            [?] Repeats
+                0: hold
+                1-255: number of repeats
+        bytes 2-3
+            [LSB, MSB] tempo (= BPM * 100)
+        """
+
+        # Extract pages
+        pages = [pages[1] for pages in result if pages[1] is not None]
+
+        tempofile = tempo.File()
+
+        # Parse header
+        maps = []
+        for p in pages:
+            # FIXME: remove every 5th byte
+            # p[0]?
+            page_num = int(p[1])
+            logging.debug("Received page #" + str(page_num))
+            # p[2] always 0
+            # p[3] always 0
+            maps += p[4:]
+
+        SysexMessage._parse_file_header(maps[0:10], tempofile)
+
+        index = SysexMessage._parse_maps(maps[10:], tempofile)
+
+        SysexMessage._parse_bars(maps[index:])
+
+        return NotImplemented
+
+    @staticmethod
+    def _parse_file_header(header, tempofile):
+        """
+        Parse tempo map file informations
+
+        :parm tempofile:
+        :type tempofile: tempo.File
+        """
+
+        # 4 bytes padding
+        # file_info[0]
+
+        # Magic number
+        if header[1:4] != tempofile.MAGIC:
+            raise TypeError("Not tempo maps data")
+        else:
+            logging.debug("Valid tempo maps data found")
+
+        # Version
+        tempofile.set_version(int(header[4]))
+
+        # 4 bytes padding
+        # file_info[5]
+
+        # File size (in bits)
+        tempofile.size = header[6] + header[7] * 256
+        logging.debug("Detected size " + str(tempofile.size) + " bytes")
+
+        # Tempo map entries
+        tempofile.entries_count = header[8]
+        logging.debug("Found " + str(tempofile.entries_count) + " tempo maps")
+
+        # Padding!
+        # file_info[9]
+
+    @staticmethod
+    def _parse_maps(maps_data, tempofile):
+
+        index = 0
+        for i in range(0, tempofile.maps_count):
+            logging.debug("Parsing map #" + str(i))
+            (inc, tempomap) = SysexMessage._parse_map(maps_data[index:], tempofile)
+            index += inc
+            tempofile.add_map(tempomap)
+
+        return index
+
+    @staticmethod
+    def _parse_map(mapdata, tempofile):
+
+        tempomap = tempo.Map()
+
+        # 4 bytes padding
+        # mapdata[0]
+
+        # Start offset
+        tempomap.start_offset = mapdata[1] + mapdata[2] * 256
+        logging.debug("Start offset: " + str(tempomap.start_offset))
+
+        # Length (in bytes)
+        tempomap.length = mapdata[3] + mapdata[4] * 256
+        logging.debug("Map length: " + str(tempomap.length) + " bytes")
+
+        # 4 bytes padding
+        # mapdata[5]
+
+        # Name (1)
+        tempomap.name = ''.join(unichr(c) for c in mapdata[6:10])
+
+        # 4 bytes padding
+        # mapping[10]
+
+        # Name (2)
+        tempomap.name += ''.join(unichr(c) for c in mapdata[11:15])
+
+        # 4 bytes padding
+        # mapping[15]
+
+        # Name (3)
+        tempomap.name += ''.join(unichr(c) for c in mapdata[16:20])
+
+        # 4 bytes padding
+        # mapping[20]
+
+        # Name (4)
+        tempomap.name += ''.join(unichr(c) for c in mapdata[21:25])
+
+        logging.debug("Map name: " + tempomap.name)
+
+        index = 25
+        if tempofile.version == 2:
+            # Loop
+            tempomap.looping = mapdata[25] == 8
+            logging.debug("Looping is " + str(tempomap.looping))
+
+            # Count-in
+            tempomap.count_in = mapdata[26]
+            logging.debug("Count-in " + str(tempomap.count_in) + " bars")
+
+            # Padding!
+            # mapdata[27:30]
+            index = 30
+
+        return index, tempomap
+
+    @staticmethod
+    def _parse_bars(bars_data):
+        print bars_data
+        pass
+
+    @staticmethod
+    def _parse_bar(bardata):
+        # TODO
+        pass
+
+    @staticmethod
+    def is_last_tm_page(answer):
+        """
+        Check if it is the last tempo maps page
+        """
+        if answer[1] is not None:
+            if len(answer[1]) > 1:
+                if answer[1][0:2] == [0x7f, 0x7f]:
+                    return True
+        return False

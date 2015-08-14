@@ -1,7 +1,7 @@
 # -*- coding: utf-8 *-*
 """BBS1 device definitions"""
 # A tool to communicate with Peterson's BBS-1 metronome
-# Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
+# Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -78,6 +78,18 @@ class Bbs1(object):
         logging.debug("Get FW version?")
         self.__fw_vers = self._get_version(SysexMessage.build_msg_req_fw_vers())
         return self.__fw_vers
+
+    def get_tempomaps(self):
+        logging.debug("Get tempo maps?")
+        infos = self.com.get_data(SysexMessage.build_msg_req_tm())
+        # TODO: decode infos (seem to always be 13 zeros)
+
+        tm = self.com.get_data(SysexMessage.build_msg_ack_ok(), SysexMessage.is_last_tm_page)
+        # 8 pages seem to be the minimum when the device is cleared
+        # Biggest pages: 39 bytes
+
+        # TODO: decode tempo maps pages
+        SysexMessage.parse_tempo_maps_pages(tm)
 
     def clear_tempomaps(self):
         logging.debug("Clear tempo maps")

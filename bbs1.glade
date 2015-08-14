@@ -120,6 +120,18 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
+              <object class="GtkToolButton" id="menu_refresh">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock_id">gtk-refresh</property>
+                <signal name="clicked" handler="on_menu_refresh_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkToolButton" id="menu_clear_all">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>

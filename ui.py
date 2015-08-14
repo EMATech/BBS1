@@ -1,7 +1,7 @@
 # -*- coding: utf-8 *-*
 """BBS1 GUI handling"""
 # A tool to communicate with Peterson's BBS-1 metronome
-# Copyright (C) 2012 Raphaël Doursenaud <rdoursenaud@free.fr>
+# Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -158,6 +158,7 @@ class Bbs1App(Gtk.Application):
 
     def normal(self):
         """Normal mode handling"""
+        self.refresh()
         # TODO
         raise NotImplementedError
 
@@ -172,7 +173,17 @@ class Bbs1App(Gtk.Application):
         about_dialog.run()
         about_dialog.hide()
 
+    def on_menu_refresh_clicked(self, menuitem, data=None):
+        """Refresh tempo maps informations"""
+        self.refresh()
+
     def on_menu_clear_all_clicked(self, menuitem, data=None):
         """Clear all tempo maps"""
+        # FIXME: add a modal confirmation dialog (with "don't ask me again") to avoid accidental deletion
         self.device.clear_tempomaps()
         # TODO: refresh free space
+
+    def refresh(self):
+        """Refresh UI informations"""
+        self.device.get_tempomaps()
+        # TODO: fill UI components

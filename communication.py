@@ -94,8 +94,7 @@ class Communication(object):
             # We must be running Python 3, let's send bytes
             self.midi_out.write_sys_ex(0, bytes(msg))
 
-    # TODO: replace length by a callback function to compute it from returned ack message
-    def get_data(self, msg, number=1):
+    def get_data(self, msg, exit_callback=None):
         """Gets reply from the hardware after sending a message
 
         :param msg: Message
@@ -106,11 +105,16 @@ class Communication(object):
         self.send(msg)
 
         answers = []
-        while number:
-            number -= 1
+        answer = None
+        condition = True
+        while condition:
             logging.debug("<-")
             answer = self._wait_for_data()
             answers.append(answer)
+            if exit_callback is None:
+                condition = False
+            else:
+                condition = not exit_callback(answer)
 
         if len(answers) == 1:
             return answer
