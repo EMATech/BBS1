@@ -374,7 +374,9 @@ class SysexMessage(object):
         """
         Human readable version string
         """
-        version = str(raw_version[1]) + '.' + str(raw_version[3]) + '.' + str(raw_version[5])
+        version = str(raw_version[1]) \
+            + '.' + str(raw_version[2]) + str(raw_version[3]) \
+            + '.' + str(raw_version[4]) + str(raw_version[5])
 
         logging.debug("Version: " + version)
 
