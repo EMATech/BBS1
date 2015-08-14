@@ -150,7 +150,7 @@ class SysexMessage(object):
     @staticmethod
     def _build_msg_send_command():
         """
-        Start BBS1 send command message
+        Start send command message
 
         Note: this seem to never work
         """
@@ -162,11 +162,51 @@ class SysexMessage(object):
     @staticmethod
     def _build_msg_send_data():
         """
-        Start BBS1 send data message
+        Start send data message
         """
         message = SysexMessage._build_msg_preamble()[:]
         message.append(_DATA)
         message.append(_RESERVED)
+        return message
+
+    @staticmethod
+    def _build_msg_send_ack_ok():
+        """
+        Start send acknowlege OK
+        """
+        message = SysexMessage._build_msg_preamble()[:]
+        message.append(_ACK_OK)
+        message.append(_RESERVED)
+        return message
+
+    @staticmethod
+    def _build_msg_send_ack_err():
+        """
+        Start send acknowlege error
+        """
+        message = SysexMessage._build_msg_preamble()[:]
+        message.append(_ACK_ERR)
+        message.append(_RESERVED)
+        return message
+
+    @staticmethod
+    def build_msg_ack_ok():
+        """
+        Build a request tempo maps message
+        """
+        message = SysexMessage._build_msg_send_ack_ok()[:]  # BBS1 happily sends data whatever the message type
+        message.append(_SYX_END)
+        return message
+
+    @staticmethod
+    def build_msg_del_tm():
+        """
+        Build a delete tempo maps message
+        """
+        # Send command does not work
+        message = SysexMessage._build_msg_send_data()[:]
+        message.append(_DEL_TM)
+        message.append(_SYX_END)
         return message
 
     @staticmethod
@@ -218,7 +258,7 @@ class SysexMessage(object):
         return message
 
     @staticmethod
-    def build_msg_req_tm_infos():
+    def build_msg_req_tm():
         """
         Build a request tempo maps informations message
         """
@@ -226,20 +266,6 @@ class SysexMessage(object):
         message = SysexMessage._build_msg_send_data()[:]
         message.append(_REQ_TM)
         # Unused 4 padding bytes ignored
-        message.append(_SYX_END)
-        return message
-
-    @staticmethod
-    def build_msg_req_tm():
-        """
-        Build a request tempo maps message
-        """
-        # Send command does not work
-        message = SysexMessage._build_msg_send_data()[:]
-        message.append(0x00)  # BBS1 happily sends data whatever this value is
-        message.append(0x7f)  # TODO: decode
-        message.append(0x7f)  # TODO: decode
-        # Unused 2 padding bytes ignored
         message.append(_SYX_END)
         return message
 
