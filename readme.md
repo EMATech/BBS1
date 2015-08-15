@@ -4,7 +4,7 @@ A tool to communicate with Peterson's BBS-1 metronome
 
 Status
 ------
-**Under development**
+**Alpha**
 
 About
 -----
@@ -21,6 +21,7 @@ Implemented
 - Reconnection to the device
 - Error handling (midi initialization, device not connected or not responding)
 - Displaying bootup mode and hardware/firmware versions
+- Display device content
 
 Todo
 ----
