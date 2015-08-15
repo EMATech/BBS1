@@ -18,8 +18,6 @@
 
 # TODO: Firmware update wizard
 # TODO: Check for firmware update online
-# TODO: Display tempo map usage
-# TODO: Clear all tempo maps
 # TODO: Save all tempo maps
 # TODO: Send all tempo maps
 # TODO: Tempo maps management

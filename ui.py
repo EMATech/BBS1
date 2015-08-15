@@ -27,6 +27,7 @@ except ImportError:
     raise
 
 
+# noinspection PyUnusedLocal
 class Bbs1App(Gtk.Application):
     """BBS1 main GUI application"""
     window = None
@@ -50,7 +51,11 @@ class Bbs1App(Gtk.Application):
         self.connect('activate', self.on_activate)
 
     def on_activate(self, data=None):
-        """Secondary initialization"""
+        """
+        Secondary initialization
+
+        :param data: Optional data
+        """
 
         # Main window
         self.window = self.builder.get_object('BBS1')
@@ -79,7 +84,11 @@ class Bbs1App(Gtk.Application):
         self.message.push(context, msg)
 
     def init_communication(self, data=None):
-        """Initialize communication"""
+        """
+        Initialize communication
+
+        :param data: Optional data
+        """
         try:
             self.com.__del__()
         except AttributeError:
@@ -105,7 +114,11 @@ class Bbs1App(Gtk.Application):
             self.quit()
 
     def init_device(self, data=None):
-        """Initialize the device"""
+        """
+        Initialize the device
+
+        :param data: Optional data
+        """
 
         # Destroy any previous device
         try:
@@ -159,8 +172,6 @@ class Bbs1App(Gtk.Application):
     def normal(self):
         """Normal mode handling"""
         self.refresh()
-        # TODO
-        raise NotImplementedError
 
     def firmware(self):
         """Firmware mode handling"""
@@ -168,30 +179,48 @@ class Bbs1App(Gtk.Application):
         raise NotImplementedError
 
     def on_menu_about_clicked(self, menuitem, data=None):
-        """Show the about dialog"""
+        """
+        Show the about dialog
+
+        :param menuitem: The menuitem that received the signal
+        :param data: Optional data
+        :type menuitem: gtk.MenuItem
+        """
         about_dialog = self.builder.get_object("about_dialog")
         about_dialog.run()
         about_dialog.hide()
 
     def on_menu_refresh_clicked(self, menuitem, data=None):
-        """Refresh tempo maps informations"""
+        """
+        Refresh tempo maps informations
+
+        :param menuitem: The menuitem that received the signal
+        :param data: Optional data
+        :type menuitem: gtk.MenuItem
+        """
         self.refresh()
 
     def on_menu_clear_all_clicked(self, menuitem, data=None):
-        """Clear all tempo maps"""
+        """
+        Clear all tempo maps
+
+        :param menuitem: The menuitem that received the signal
+        :param data: Optional data
+        :type menuitem: gtk.MenuItem
+        """
         # FIXME: add a modal confirmation dialog (with "don't ask me again") to avoid accidental deletion
         self.device.clear_tempomaps()
-        # TODO: refresh free space
+        self.refresh()
 
     def refresh(self):
         """Refresh UI informations"""
         tempofile = self.device.get_tempomaps()
-        # TODO: fill UI components
+        # TODO: free space
         for i in range(0, tempofile.maps_count):
             igtk = str(i + 1)
             entryname = 'entry' + igtk
             self.builder.get_object(entryname).set_text(tempofile.maps[i].name)
             spinbuttonname = 'spinbutton' + igtk
             self.builder.get_object(spinbuttonname).set_value(tempofile.maps[i].count_in)
-            switchname = 'switch' +igtk
+            switchname = 'switch' + igtk
             self.builder.get_object(switchname).set_state(tempofile.maps[i].looping)

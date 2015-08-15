@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sysex
 import logging
 from sysex import SysexMessage
 
@@ -80,18 +79,15 @@ class Bbs1(object):
         return self.__fw_vers
 
     def get_tempomaps(self):
+        """Get tempo maps from the device"""
         logging.debug("Get tempo maps?")
         infos = self.com.get_data(SysexMessage.build_msg_req_tm())
         # TODO: decode infos (seem to always be 13 zeros)
-
         tm = self.com.get_data(SysexMessage.build_msg_ack_ok(), SysexMessage.is_last_tm_page)
-        # 8 pages seem to be the minimum when the device is cleared
-        # Biggest pages: 39 bytes
-
         tempofile = SysexMessage.parse_tempo_maps_pages(tm)
-
         return tempofile
 
     def clear_tempomaps(self):
+        """Clear the device's tempo maps storage"""
         logging.debug("Clear tempo maps")
         self.com.send(SysexMessage.build_msg_del_tm())

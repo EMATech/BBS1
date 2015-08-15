@@ -132,9 +132,10 @@ _ANS_MODE = 0x23
 _DEL_TM = 0x24
 
 # Virtual keys / encoder
-## These doesn't seem to work !
+# These doesn't seem to work !
 _VKEY = 0x40
 _VENC = 0x41
+
 
 class SysexMessage(object):
     """BBS1 System exclusive message"""
@@ -272,8 +273,12 @@ class SysexMessage(object):
     def parse(message):
         """
         Parse BBS1 SysEx messages
-        """
 
+        :param message: Raw device data
+        :type message: list
+        :return: 'command', payload
+        :rtype: str, mixed
+        """
         logging.debug(hexlify(bytearray(message)))
 
         start = message[0]
@@ -299,19 +304,19 @@ class SysexMessage(object):
         if msg_type == _CMD:
             logging.debug("Command")
             payload = SysexMessage.parse_payload(message[6:-1])
-            return ('command', payload)
+            return 'command', payload
         elif msg_type == _DATA:
             logging.debug("Data")
             payload = SysexMessage.parse_payload(message[6:-1])
-            return ('data', payload)
+            return 'data', payload
         elif msg_type == _ACK_OK:
             logging.debug("Acknowledge OK")
             payload = SysexMessage.parse_payload(message[6:-1])
-            return ('ok', payload)
+            return 'ok', payload
         elif msg_type == _ACK_ERR:
             logging.debug("Acknowledge error")
             payload = SysexMessage.parse_payload(message[6:-1])
-            return ('err', payload)
+            return 'err', payload
         else:
             logging.error("Unknown message type")
 
@@ -319,12 +324,19 @@ class SysexMessage(object):
     def parse_payload(data):
         """
         Parse BBS1 SysEx messages payloads
+
+        :param data: Raw payload data
+        :type data: list
+        :return: Parsed payload data
+        :rtype: mixed
         """
-        if data[0] != _RESERVED:
+        if data[0] == 0x23:
+            logging.debug("Tempo map payload")
+        elif data[0] != _RESERVED:
             logging.warning("Unknown SysEx message payload reserved field")
-        # 0x23 seem to be used for tempo maps pages
 
         if len(data) == 1:
+            logging.debug("Empty payload")
             return
 
         # Requests
@@ -367,7 +379,7 @@ class SysexMessage(object):
             return
         elif data[1] == _TM_PG:
             logging.debug("Tempo map page")
-            # TODO: code/decode
+            # TODO: try to code/decode from here
             return data[2:]
 
         # Answers
@@ -392,15 +404,19 @@ class SysexMessage(object):
             return 'connected'
 
         # Remaining data
-        else:
-            logging.error("Unknown payload")
-
-        return logging.debug(data[2:])
+        logging.error("Unknown payload")
+        logging.debug(hexlify(bytearray(data[2:])))
+        return data[2:]
 
     @staticmethod
     def parse_version(raw_version):
         """
         Human readable version string
+
+        :param raw_version: Raw version message
+        :type raw_version: list
+        :return: Human readable version
+        :rtype: str
         """
         version = str(raw_version[1]) \
             + '.' + str(raw_version[2]) + str(raw_version[3]) \
@@ -414,6 +430,11 @@ class SysexMessage(object):
     def parse_mode(raw_mode):
         """
         Human readable mode
+
+        :param raw_mode: Raw mode message
+        :type raw_mode: list
+        :return: Human readable mode
+        :rtype: str
         """
         mode = 'unknown'
         if raw_mode[0] == 0x00:
@@ -427,7 +448,14 @@ class SysexMessage(object):
 
     @staticmethod
     def parse_tempo_maps_pages(result):
+        """
+        Parse tempo maps
 
+        :param result: Raw results from get_data()
+        :type result: list
+        :return: Tempo file
+        :rtype: tempo.File
+        """
         logging.debug("Parse tempo maps pages")
 
         """
@@ -529,7 +557,6 @@ class SysexMessage(object):
         # Parse header
         maps = []
         for p in pages:
-            # FIXME: remove every 5th byte
             # p[0]?
             page_num = int(p[1])
             logging.debug("Received page #" + str(page_num))
@@ -582,6 +609,16 @@ class SysexMessage(object):
 
     @staticmethod
     def _parse_maps(maps_data, tempofile):
+        """
+        Parse maps data
+
+        :param maps_data: Raw maps data
+        :param tempofile: Tempo file
+        :type maps_data: list
+        :type tempofile: tempo.File
+        :return: Next data index
+        :rtype: int
+        """
 
         index = 0
         for i in range(0, tempofile.maps_count):
@@ -594,7 +631,16 @@ class SysexMessage(object):
 
     @staticmethod
     def _parse_map(mapdata, tempofile):
+        """
+        Parse one map from raw data
 
+        :param mapdata: Raw map data
+        :param tempofile: Tempo file
+        :type mapdata: list
+        :type tempofile: tempo.file
+        :return: (index, tempomap)
+        :rtype: (int, tempo.Map)
+        """
         tempomap = tempo.Map()
 
         # 4 bytes padding
@@ -652,11 +698,23 @@ class SysexMessage(object):
 
     @staticmethod
     def _parse_bars(bars_data):
-        print bars_data
+        """
+        Parse bars from raw data
+
+        :param bars_data: Raw bars data
+        :type bars_data: list
+        """
+        # TODO
         pass
 
     @staticmethod
     def _parse_bar(bardata):
+        """
+        Parse one bar from raw data
+
+        :param bardata: Raw bar data
+        :type bardata: list
+        """
         # TODO
         pass
 
@@ -664,6 +722,11 @@ class SysexMessage(object):
     def is_last_tm_page(answer):
         """
         Check if it is the last tempo maps page
+
+        :param answer: Answer data
+        :type answer: str, list
+        :return: Last tempo map page status
+        :rtype: bool
         """
         if answer[1] is not None:
             if len(answer[1]) > 1:

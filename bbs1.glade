@@ -21,6 +21,7 @@ along with BBS1.  If not, see <http://www.gnu.org/licenses/>.
 Author: Raphaël Doursenaud <rdoursenaud@free.fr>
 
 -->
+<!--suppress XmlUnboundNsPrefix -->
 <interface>
   <requires lib="gtk+" version="3.6"/>
   <!-- interface-license-type gplv3 -->

@@ -18,6 +18,7 @@
 
 import logging
 
+
 class File(object):
     """
     Tempo file
@@ -43,6 +44,12 @@ class File(object):
             self.maps_count = len(maps)
 
     def set_version(self, version):
+        """
+        Set tempo maps structure version
+
+        :param version: Version number
+        :type version: int
+        """
         if version != 1 and version != 2:
             raise TypeError("Unknown tempo maps version: " + str(version))
         logging.debug("Tempo maps version " + str(version))

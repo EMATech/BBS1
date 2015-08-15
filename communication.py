@@ -42,6 +42,7 @@ class Communication(object):
         """Destroy MIDI communication channel"""
         midi.quit()
 
+    # noinspection PyUnboundLocalVariable
     def connect(self):
         """Connect to the first BBS-1"""
         # Get number of MIDI devices
@@ -79,14 +80,15 @@ class Communication(object):
         self.midi_out = midi.Output(dev_out)
 
     def send(self, msg):
-        """Sends out SysEx message
+        """
+        Sends out SysEx message
 
         :param msg: Message
-        :type msg: str
+        :type msg: list
         """
 
         logging.debug("->")
-        SysexMessage.parse(msg)  # FIXME: debugging
+        SysexMessage.parse(msg)  # For debugging messages
 
         try:
             self.midi_out.write_sys_ex(0, msg)
@@ -95,12 +97,15 @@ class Communication(object):
             self.midi_out.write_sys_ex(0, bytes(msg))
 
     def get_data(self, msg, exit_callback=None):
-        """Gets reply from the hardware after sending a message
+        """
+        Gets reply from the hardware after sending a message
 
         :param msg: Message
-        :type msg: str
-        :param number: Number of SysEx messages replies expected
-        :type number: int
+        :type msg: list
+        :param exit_callback: A callback function to stop listening to the device
+        :type exit_callback: function
+        :return: Device answer
+        :rtype: str, mixed | (str, mixed)[]
         """
         self.send(msg)
 
@@ -122,6 +127,12 @@ class Communication(object):
         return answers
 
     def _wait_for_data(self):
+        """
+        Wait for and get input data
+
+        :return: Answer
+        :rtype: str, mixed
+        """
         # Wait for answer
         while not self.midi_in.poll():
             pass
