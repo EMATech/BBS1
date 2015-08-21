@@ -215,11 +215,20 @@ class Bbs1App(Gtk.Application):
         for i in range(0, self.tempofile.maps_count):
             igtk = str(i + 1)
             entryname = 'entry' + igtk
-            self.builder.get_object(entryname).set_text(self.tempofile.maps[i].name)
+            entry = self.builder.get_object(entryname)
+            entry.handler_block_by_func(self.on_changed)
+            entry.set_text(self.tempofile.maps[i].name)
+            entry.handler_unblock_by_func(self.on_changed)
             spinbuttonname = 'spinbutton' + igtk
-            self.builder.get_object(spinbuttonname).set_value(self.tempofile.maps[i].count_in)
+            spinbutton = self.builder.get_object(spinbuttonname)
+            spinbutton.handler_block_by_func(self.on_changed)
+            spinbutton.set_value(self.tempofile.maps[i].count_in)
+            spinbutton.handler_unblock_by_func(self.on_changed)
             switchname = 'switch' + igtk
-            self.builder.get_object(switchname).set_state(self.tempofile.maps[i].looping)
+            switch = self.builder.get_object(switchname)
+            switch.handler_block_by_func(self.on_changed)
+            switch.set_state(self.tempofile.maps[i].looping)
+            switch.handler_unblock_by_func(self.on_changed)
 
         self.builder.get_object('menu_apply').set_sensitive(not self.tempofile == self.tempofile_cache)
 
