@@ -29,18 +29,20 @@ class Bar(object):
         self.repeats = repeats
         self.tempo = bpm * 100
 
-    # def __eq__(self, other):
-    #     return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-    #
-    # def __ne__(self, other):
-    #     return not self.__eq__(other)
+        def __eq__(self, other):
+            return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+        def __ne__(self, other):
+            return not self.__eq__(other)
 
 
 class Map(object):
     """
     Tempo map
     """
-    def __init__(self, bars=None, name='', looping=False, count_in=0):
+
+    def __init__(self, bars=None, name='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+                 looping=False, count_in=0):
         self.start_offset = 0
         self.length = 0
         self.bars = []  # List of bars
@@ -64,8 +66,8 @@ class Map(object):
         """
         Resets the map
         """
-        self.bars = None
-        self.name = ''
+        self.bars = []
+        self.name = '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
         self.looping = False
         self.count_in = 0
 
@@ -116,5 +118,3 @@ class File(object):
             raise TypeError("Unknown tempo maps version: " + str(version))
         logging.debug("Tempo maps version " + str(version))
         self.version = version
-
-
