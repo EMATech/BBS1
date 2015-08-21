@@ -229,7 +229,7 @@ class Bbs1App(Gtk.Application):
         self.device.clear_tempomaps()
         self.refresh()
 
-    def on_checkcleardontask_toggled(self, widget, data="None"):
+    def on_checkcleardontask_toggled(self, widget, data=None):
         """
         Don't ask before device clearing callback
 
