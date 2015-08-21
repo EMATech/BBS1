@@ -314,7 +314,7 @@ class Bbs1App(Gtk.Application):
                           + ' to: '
                           + str(self.tempofile.maps[map_index].count_in))
         elif isinstance(widget, Gtk.Entry):
-            self.tempofile.maps[map_index].name = widget.get_text()
+            self.tempofile.maps[map_index].set_name(widget.get_text())
             logging.debug("Set name for map #"
                           + str(map_index)
                           + ' to: '

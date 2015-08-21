@@ -41,7 +41,7 @@ class Map(object):
     Tempo map
     """
 
-    def __init__(self, bars=None, name='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    def __init__(self, bars=None, name=''.ljust(16, '\x00'),
                  looping=False, count_in=0):
         self.start_offset = 0
         self.length = 0
@@ -67,10 +67,15 @@ class Map(object):
         Resets the map
         """
         self.bars = []
-        self.name = '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+        self.name = ''.ljust(16, '\x00')
         self.looping = False
         self.count_in = 0
 
+    def set_name(self, name):
+        """
+        Set the map name correctly padded
+        """
+        self.name = name.ljust(16, '\x00')
 
 class File(object):
     """
