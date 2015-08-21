@@ -352,10 +352,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry1">
+                <property name="name">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -364,10 +367,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry2">
+                <property name="name">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -376,10 +382,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry3">
+                <property name="name">3</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -388,10 +397,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry4">
+                <property name="name">4</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -400,10 +412,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry5">
+                <property name="name">5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -412,10 +427,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry6">
+                <property name="name">6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -424,10 +442,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry7">
+                <property name="name">7</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -436,10 +457,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry8">
+                <property name="name">8</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -448,10 +472,13 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkEntry" id="entry9">
+                <property name="name">9</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
+                <property name="max_width_chars">16</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -460,6 +487,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton1">
+                <property name="name">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -469,6 +497,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment1</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -477,8 +506,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch1">
+                <property name="name">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -487,8 +518,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch2">
+                <property name="name">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -497,8 +530,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch3">
+                <property name="name">3</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -507,8 +542,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch4">
+                <property name="name">4</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -517,8 +554,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch5">
+                <property name="name">5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -527,8 +566,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch6">
+                <property name="name">6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -537,8 +578,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch7">
+                <property name="name">7</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -547,8 +590,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch8">
+                <property name="name">8</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -557,8 +602,10 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSwitch" id="switch9">
+                <property name="name">9</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -804,6 +851,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton2">
+                <property name="name">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -813,6 +861,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment2</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -821,6 +870,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton3">
+                <property name="name">3</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -830,6 +880,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment3</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -838,6 +889,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton4">
+                <property name="name">4</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -847,6 +899,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment4</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -855,6 +908,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton5">
+                <property name="name">5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -864,6 +918,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment5</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -872,6 +927,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton6">
+                <property name="name">6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -881,6 +937,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment6</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -889,6 +946,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton7">
+                <property name="name">7</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -898,6 +956,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment7</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -906,6 +965,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton8">
+                <property name="name">8</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -915,6 +975,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment8</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -923,6 +984,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             </child>
             <child>
               <object class="GtkSpinButton" id="spinbutton9">
+                <property name="name">9</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">1</property>
@@ -932,6 +994,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="adjustment">adjustment9</property>
                 <property name="snap_to_ticks">True</property>
                 <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>

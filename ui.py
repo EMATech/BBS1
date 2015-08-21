@@ -271,15 +271,47 @@ class Bbs1App(Gtk.Application):
         about_dialog.run()
         about_dialog.hide()
 
-    def on_del_button_clicked(self, data=None):
+    def on_del_button_clicked(self, button, data=None):
         """
         Reset one entry
 
+        :param button: Widget clicked
         :param data: Optional data
-        :type data: gtk.Button
+        :type button: gtk.Button
         """
-        name = int(data.get_name())
-        self.tempofile.maps[name - 1].reset()
+        map_index = int(button.get_name()) - 1
+        self.tempofile.maps[map_index].reset()
+        self._refresh_ui()
+
+    def on_changed(self, widget, data=None):
+        """
+        Update changed UI values
+
+        :param widget: The changed widget
+        :param data: Optional data
+        :type widget: gtk.Widget
+        """
+        map_index = int(widget.get_name()) - 1
+        if isinstance(widget, Gtk.Switch):
+            self.tempofile.maps[map_index].looping = widget.get_active()
+            logging.debug("Set looping for map #"
+                          + str(map_index)
+                          + ' to: '
+                          + str(self.tempofile.maps[map_index].looping))
+        elif isinstance(widget, Gtk.SpinButton):
+            self.tempofile.maps[map_index].count_in = int(widget.get_text())
+            logging.debug("Set count_in for map #"
+                          + str(map_index)
+                          + ' to: '
+                          + str(self.tempofile.maps[map_index].count_in))
+        elif isinstance(widget, Gtk.Entry):
+            self.tempofile.maps[map_index].name = widget.get_text()
+            logging.debug("Set name for map #"
+                          + str(map_index)
+                          + ' to: '
+                          + str(self.tempofile.maps[map_index].name))
+        else:
+            raise TypeError("Unexpected widget")
         self._refresh_ui()
 
     def _unimplemented(self):
