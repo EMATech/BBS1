@@ -26,6 +26,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
   <requires lib="gtk+" version="3.6"/>
   <!-- interface-license-type gplv3 -->
   <!-- interface-name BBS1 -->
+  <!-- interface-description A tool to communicate with Peterson's BBS-1 metronome -->
   <!-- interface-copyright 2012-2015 Rapha\303\253l Doursenaud <rdoursenaud@free.fr> -->
   <!-- interface-authors Rapha\303\253l Doursenaud <rdoursenaud@free.fr> -->
   <object class="GtkAdjustment" id="adjustment1">
@@ -191,7 +192,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <property name="row_spacing">2</property>
             <property name="column_spacing">2</property>
             <child>
-              <object class="GtkLabel" id="label4">
+              <object class="GtkLabel" id="labelc1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Slot</property>
@@ -202,7 +203,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label5">
+              <object class="GtkLabel" id="labelc2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Name</property>
@@ -213,7 +214,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label6">
+              <object class="GtkLabel" id="labelc3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Count in</property>
@@ -224,7 +225,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label7">
+              <object class="GtkLabel" id="labelc4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Loop</property>
@@ -235,7 +236,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label8">
+              <object class="GtkLabel" id="labelc5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">MIDI file</property>
@@ -246,7 +247,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label9">
+              <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">1</property>
@@ -257,7 +258,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label10">
+              <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">2</property>
@@ -268,7 +269,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label11">
+              <object class="GtkLabel" id="label3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">3</property>
@@ -279,7 +280,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label12">
+              <object class="GtkLabel" id="label4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">4</property>
@@ -290,7 +291,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label13">
+              <object class="GtkLabel" id="label5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">5</property>
@@ -301,7 +302,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label14">
+              <object class="GtkLabel" id="label6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">6</property>
@@ -312,7 +313,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label15">
+              <object class="GtkLabel" id="label7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">7</property>
@@ -323,7 +324,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label16">
+              <object class="GtkLabel" id="label8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">8</property>
@@ -334,7 +335,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label17">
+              <object class="GtkLabel" id="label9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">9</property>
@@ -348,7 +349,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -360,7 +361,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry2">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -372,7 +373,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry3">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -384,7 +385,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry4">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -396,7 +397,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry5">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -408,7 +409,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry6">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -420,7 +421,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry7">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -432,7 +433,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry8">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -444,7 +445,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkEntry" id="entry9">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="max_length">15</property>
+                <property name="max_length">16</property>
                 <property name="invisible_char">●</property>
               </object>
               <packing>
@@ -563,6 +564,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -574,6 +576,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -585,6 +588,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -596,6 +600,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -607,6 +612,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -618,6 +624,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -629,6 +636,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -640,6 +648,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -651,6 +660,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkFileChooserButton" id="filechooserbutton9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="filter">midifilefilter</property>
               </object>
               <packing>
@@ -659,7 +669,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button3">
+              <object class="GtkButton" id="button1">
                 <property name="label">gtk-delete</property>
                 <property name="use_action_appearance">False</property>
                 <property name="related_action"/>
@@ -674,7 +684,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button5">
+              <object class="GtkButton" id="button3">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -688,7 +698,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button6">
+              <object class="GtkButton" id="button4">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -702,7 +712,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button7">
+              <object class="GtkButton" id="button5">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -716,7 +726,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button8">
+              <object class="GtkButton" id="button6">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -730,7 +740,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button9">
+              <object class="GtkButton" id="button7">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -744,7 +754,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button10">
+              <object class="GtkButton" id="button8">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -758,7 +768,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button11">
+              <object class="GtkButton" id="button9">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -908,7 +918,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button4">
+              <object class="GtkButton" id="button2">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
                 <property name="visible">True</property>
@@ -953,7 +963,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkLabel" id="labelb1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Hardware version : </property>
@@ -988,7 +998,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkLabel" id="label3">
+                  <object class="GtkLabel" id="labelb2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Firmware version : </property>
