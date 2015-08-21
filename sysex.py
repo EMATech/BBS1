@@ -420,8 +420,8 @@ class SysexMessage(object):
         :rtype: str
         """
         version = str(raw_version[1]) \
-            + '.' + str(raw_version[2]) + str(raw_version[3]) \
-            + '.' + str(raw_version[4]) + str(raw_version[5])
+                  + '.' + str(raw_version[2]) + str(raw_version[3]) \
+                  + '.' + str(raw_version[4]) + str(raw_version[5])
 
         logging.debug("Version: " + version)
 
@@ -458,6 +458,9 @@ class SysexMessage(object):
         :rtype: tempo.File
         """
         logging.debug("Parse tempo maps pages")
+
+        # FIXME: MIDI SysEx is coded on 7 bits
+        # Bit shifting occurs in tempomaps data!!!
 
         """
         Tempo maps format
@@ -537,6 +540,9 @@ class SysexMessage(object):
         Repeated as needed
         See info start offset and length
 
+        Note:
+        Does not support tempo change inside a bar
+
         ::
         byte 0
             [?] Time signature
@@ -547,7 +553,7 @@ class SysexMessage(object):
                 0: hold
                 1-255: number of repeats
         bytes 2-3
-            [LSB, MSB] tempo (= BPM * 100)
+            [LSB, MSB] tempo (= BPM * 100) 10-280 (not enforced by firwmare)
         """
 
         # Extract pages
@@ -565,11 +571,13 @@ class SysexMessage(object):
             # p[3] always 0
             maps += p[4:]
 
+        logging.debug('Raw data:' + str(hexlify(bytearray(maps))))
+
         SysexMessage._parse_file_header(maps[0:10], tempofile)
 
         index = SysexMessage._parse_maps(maps[10:], tempofile)
 
-        SysexMessage._parse_bars(maps[index:])
+        SysexMessage._parse_bars(maps[index:], tempofile)
 
         return tempofile
 
@@ -624,7 +632,7 @@ class SysexMessage(object):
         index = 0
         for i in range(0, tempofile.maps_count):
             logging.debug("Parsing map #" + str(i))
-            (inc, tempomap) = SysexMessage._parse_map(maps_data[index:], tempofile)
+            inc, tempomap = SysexMessage._parse_map(maps_data[index:], tempofile)
             index += inc
             tempofile.maps[i] = tempomap
 
@@ -714,15 +722,20 @@ class SysexMessage(object):
         return index, tempomap
 
     @staticmethod
-    def _parse_bars(bars_data):
+    def _parse_bars(bars_data, tempofile):
         """
         Parse bars from raw data
 
         :param bars_data: Raw bars data
         :type bars_data: list
         """
-        # TODO
-        pass
+        index = 10
+        for i in range(0, tempofile.maps_count - 1):
+            logging.debug('Parsing bars from map #' + str(i))
+            for b in range(0, int(tempofile.maps[i].length / 4)):
+                logging.debug('Parsing bar #' + str(b))
+                tempofile.maps[i].bars.append(SysexMessage._parse_bar(bars_data[index:]))
+                index += 5
 
     @staticmethod
     def _parse_bar(bardata):
@@ -731,9 +744,30 @@ class SysexMessage(object):
 
         :param bardata: Raw bar data
         :type bardata: list
+        :return: Decoded bar
+        :rtype: tempo.Bar
         """
-        # TODO
-        pass
+        logging.debug("Bar data:" + str(hexlify(bytearray(bardata[0:5]))))
+
+        bar = tempo.Bar()
+        # Padding!
+        # bardata[0]
+
+        # Time signature
+        bar.beats_per_bar = int(bardata[1] >> 4)
+        logging.debug("Signature top: " + str(bar.beats_per_bar))
+        bar.beat_value = int(1 << (bardata[1] & 0b00001111))
+        logging.debug("Signature bottom: " + str(bar.beat_value))
+
+        # Repeats
+        bar.repeats = bardata[2]
+        logging.debug("Repeats: " + str(bar.repeats))
+
+        # Tempo
+        bar.tempo = bardata[3] + bardata[4] * 256
+        logging.debug("Tempo: " + str(bar.tempo / 100))
+
+        return bar
 
     @staticmethod
     def is_last_tm_page(answer):
