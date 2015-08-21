@@ -40,12 +40,11 @@ class Map(object):
     """
     Tempo map
     """
-
     def __init__(self, bars=None, name=''.ljust(16, '\x00'),
                  looping=False, count_in=0):
         self.start_offset = 0
         self.length = 0
-        self.bars = []  # List of bars
+        self.bars = []  # List of bars (max 1018)
         if bars is not None:
             self.bars = bars
         self.name = name
@@ -81,6 +80,7 @@ class File(object):
     """
     Tempo file
     """
+    # TODO: load and save file
     MAGIC = [0x42, 0x42, 0x53]  # == 'BBS'
 
     def __init__(self, maps=None):

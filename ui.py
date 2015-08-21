@@ -211,7 +211,11 @@ class Bbs1App(Gtk.Application):
         self._refresh_ui()
 
     def _refresh_ui(self):
-        # TODO: compute and display free space
+        # Compute and display free space
+        # Free space is 4kB * 9 = 36kB
+        # <=> 1018 bars * 9 = 9162
+        free_space = 36864  # in bytes
+
         for i in range(0, self.tempofile.maps_count):
             igtk = str(i + 1)
             entryname = 'entry' + igtk
@@ -229,6 +233,11 @@ class Bbs1App(Gtk.Application):
             switch.handler_block_by_func(self.on_changed)
             switch.set_state(self.tempofile.maps[i].looping)
             switch.handler_unblock_by_func(self.on_changed)
+            free_space -= self.tempofile.maps[i].length
+
+        fraction_space = free_space / 36864
+        logging.debug('Space available: ' + str(fraction_space))
+        self.builder.get_object('free_space').set_fraction(fraction_space)
 
         self.builder.get_object('menu_apply').set_sensitive(not self.tempofile == self.tempofile_cache)
 
