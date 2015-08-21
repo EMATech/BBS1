@@ -16,8 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from copy import deepcopy
+
 import communication
 import device
+import logging
 
 try:
     # noinspection PyPackageRequirements,PyUnresolvedReferences
@@ -36,6 +39,8 @@ class Bbs1App(Gtk.Application):
     fw_vers = ''
     com = None
     device = None
+    tempofile = None
+    tempofile_cache = None
 
     def __init__(self):
         """Application initialization"""
@@ -214,13 +219,32 @@ class Bbs1App(Gtk.Application):
 
     def refresh(self):
         """Refresh UI informations"""
-        tempofile = self.device.get_tempomaps()
+        self.tempofile = self.device.get_tempomaps()
+        self.tempofile_cache = deepcopy(self.tempofile)
+        logging.debug("Successfully cached tempo file: " + str(self.tempofile == self.tempofile_cache))
+        self._refresh_ui()
+
+    def on_del_button_clicked(self, data=None):
+        """
+        Reset one entry
+
+        :param data: Optional data
+        :type data: gtk.Button
+        """
+        name = int(data.get_name())
+        self.tempofile.maps[name - 1].reset()
+        self._refresh_ui()
+
+    def _refresh_ui(self):
         # TODO: free space
-        for i in range(0, tempofile.maps_count):
+        for i in range(0, self.tempofile.maps_count):
             igtk = str(i + 1)
             entryname = 'entry' + igtk
-            self.builder.get_object(entryname).set_text(tempofile.maps[i].name)
+            self.builder.get_object(entryname).set_text(self.tempofile.maps[i].name)
             spinbuttonname = 'spinbutton' + igtk
-            self.builder.get_object(spinbuttonname).set_value(tempofile.maps[i].count_in)
+            self.builder.get_object(spinbuttonname).set_value(self.tempofile.maps[i].count_in)
             switchname = 'switch' + igtk
-            self.builder.get_object(switchname).set_state(tempofile.maps[i].looping)
+            self.builder.get_object(switchname).set_state(self.tempofile.maps[i].looping)
+
+        if self.tempofile != self.tempofile_cache:
+            self.builder.get_object("menu_apply").set_sensitive(True)

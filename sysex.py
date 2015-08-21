@@ -18,6 +18,7 @@
 
 import logging
 from binascii import hexlify
+
 import tempo
 
 """

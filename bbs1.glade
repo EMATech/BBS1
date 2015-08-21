@@ -148,6 +148,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkToolButton" id="menu_apply">
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
                 <property name="stock_id">gtk-apply</property>
               </object>
@@ -673,10 +674,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="label">gtk-delete</property>
                 <property name="use_action_appearance">False</property>
                 <property name="related_action"/>
+                <property name="name">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -687,10 +690,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button3">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">3</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -701,10 +706,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button4">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">4</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -715,10 +722,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button5">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -729,10 +738,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button6">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -743,10 +754,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button7">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">7</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -757,10 +770,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button8">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">8</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -771,10 +786,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button9">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">9</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -921,10 +938,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button2">
                 <property name="label">gtk-delete</property>
                 <property name="related_action"/>
+                <property name="name">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">5</property>

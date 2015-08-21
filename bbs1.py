@@ -26,8 +26,9 @@
 # TODO: Wireless protocol
 
 import logging
-import ui
 import sys
+
+import ui
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)

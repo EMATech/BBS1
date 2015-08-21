@@ -18,6 +18,7 @@
 
 import logging
 import re
+
 from sysex import SysexMessage
 
 try:

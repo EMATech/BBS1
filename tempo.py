@@ -19,29 +19,91 @@
 import logging
 
 
+class Bar(object):
+    """
+    Tempo Bar
+    """
+    def __init__(self, beats_per_bar=4, beat_value=4, repeats=0, bpm=120):
+        self.beats_per_bar = beats_per_bar
+        self.beat_value = beat_value
+        self.repeats = repeats
+        self.tempo = bpm * 100
+
+    # def __eq__(self, other):
+    #     return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+    #
+    # def __ne__(self, other):
+    #     return not self.__eq__(other)
+
+
+class Map(object):
+    """
+    Tempo map
+    """
+    def __init__(self, bars=None, name='', looping=False, count_in=0):
+        self.start_offset = 0
+        self.length = 0
+        self.bars = []  # List of bars
+        if bars is not None:
+            self.bars = bars
+        self.name = name
+        self.looping = looping
+        if not 0 <= count_in <= 8:
+            raise TypeError("Count-in must be between 0 and 8")
+        self.count_in = count_in
+
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+                and self.__dict__ == other.__dict__
+                and self.bars == other.bars)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def reset(self):
+        """
+        Resets the map
+        """
+        self.bars = None
+        self.name = ''
+        self.looping = False
+        self.count_in = 0
+
+
 class File(object):
     """
     Tempo file
     """
     MAGIC = [0x42, 0x42, 0x53]  # == 'BBS'
-    version = 2
-    size = 0  # in bits
-    maps_count = 9
-    maps = [None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None]  # list of Maps
 
     def __init__(self, maps=None):
+        self.version = 2
+        self.size = 0  # in bits (TODO: compute)
+        self.maps = [Map(),
+                     Map(),
+                     Map(),
+                     Map(),
+                     Map(),
+                     Map(),
+                     Map(),
+                     Map(),
+                     Map()]  # list of Maps
         if maps is not None:
             self.maps = maps
-            # Compute maps count
-            self.maps_count = len(maps)
+        # Compute maps count (generally 9)
+        maps_count = len(self.maps)
+        if not 0 <= maps_count <= 9:
+            raise TypeError("Files can only have 0 to 9 maps")
+        self.maps_count = maps_count
+
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+                and self.__dict__ == other.__dict__
+                and self.maps == other.maps
+                and all([tmap == othertmap for tmap, othertmap in zip(self.maps, other.maps)]))
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def set_version(self, version):
         """
@@ -56,35 +118,3 @@ class File(object):
         self.version = version
 
 
-class Map(object):
-    """
-    Tempo map
-    """
-    start_offset = 0
-    length = 0
-    name = ''
-    looping = False
-    count_in = 0  # 0-8
-    bars = []  # List of Bars
-
-    def __init__(self, bars=None, name='', looping=False, count_in=0):
-        self.bars = bars
-        self.name = name
-        self.looping = looping
-        self.count_in = count_in
-
-
-class Bar(object):
-    """
-    Tempo Bar
-    """
-    beats_per_bar = 4
-    beat_value = 4
-    repeats = 0  # 0-255 with 0 = hold
-    tempo = 12000  # BPM * 100
-
-    def __init__(self, beats_per_bar=4, beat_value=4, repeats=0, bpm=120):
-        self.beats_per_bar = beats_per_bar
-        self.beat_value = beat_value
-        self.repeats = repeats
-        self.tempo = bpm * 100
