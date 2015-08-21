@@ -41,6 +41,7 @@ class Bbs1App(Gtk.Application):
     device = None
     tempofile = None
     tempofile_cache = None
+    clear_confirm = True  # Ask for confirmation before clearing device
 
     def __init__(self):
         """Application initialization"""
@@ -207,15 +208,36 @@ class Bbs1App(Gtk.Application):
 
     def on_menu_clear_all_clicked(self, menuitem, data=None):
         """
-        Clear all tempo maps
+        Handle clear all tempo maps button
 
         :param menuitem: The menuitem that received the signal
         :param data: Optional data
         :type menuitem: gtk.MenuItem
         """
-        # FIXME: add a modal confirmation dialog (with "don't ask me again") to avoid accidental deletion
+        if self.clear_confirm:
+            confirm = self.builder.get_object('clear_all_confirm_dialog')
+            if confirm.run() == -8:
+                self._clear_all()
+            confirm.hide()
+        else:
+            self._clear_all()
+
+    def _clear_all(self):
+        """
+        Clear all tempo maps
+        """
         self.device.clear_tempomaps()
         self.refresh()
+
+    def on_checkcleardontask_toggled(self, widget, data="None"):
+        """
+        Don't ask before device clearing callback
+
+        :param widget: The checkbox that received the signal
+        :param data: Optional data
+        :type widget: gtk.CheckButton
+        """
+        self.clear_confirm = not widget.get_active()
 
     def refresh(self):
         """Refresh UI informations"""
