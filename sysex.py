@@ -659,25 +659,41 @@ class SysexMessage(object):
         # mapdata[5]
 
         # Name (1)
-        tempomap.name = ''.join(unichr(c) for c in mapdata[6:10])
+        try:
+            tempomap.name = ''.join(unichr(c) for c in mapdata[6:10])
+        except NameError:
+            # We must be running Python 3
+            tempomap.name = ''.join(chr(c) for c in mapdata[6:10])
 
         # 4 bytes padding
         # mapping[10]
 
         # Name (2)
-        tempomap.name += ''.join(unichr(c) for c in mapdata[11:15])
+        try:
+            tempomap.name += ''.join(unichr(c) for c in mapdata[11:15])
+        except NameError:
+            # We must be running Python 3
+            tempomap.name += ''.join(chr(c) for c in mapdata[11:15])
 
         # 4 bytes padding
         # mapping[15]
 
         # Name (3)
-        tempomap.name += ''.join(unichr(c) for c in mapdata[16:20])
+        try:
+            tempomap.name += ''.join(unichr(c) for c in mapdata[16:20])
+        except NameError:
+            # We must be running Python 3
+            tempomap.name += ''.join(chr(c) for c in mapdata[16:20])
 
         # 4 bytes padding
         # mapping[20]
 
         # Name (4)
-        tempomap.name += ''.join(unichr(c) for c in mapdata[21:25])
+        try:
+            tempomap.name += ''.join(unichr(c) for c in mapdata[21:25])
+        except NameError:
+            # We must be running Python 3
+            tempomap.name += ''.join(chr(c) for c in mapdata[21:25])
 
         logging.debug("Map name: " + tempomap.name)
 
