@@ -268,5 +268,4 @@ class Bbs1App(Gtk.Application):
             switchname = 'switch' + igtk
             self.builder.get_object(switchname).set_state(self.tempofile.maps[i].looping)
 
-        if self.tempofile != self.tempofile_cache:
-            self.builder.get_object('menu_apply').set_sensitive(True)
+        self.builder.get_object('menu_apply').set_sensitive(not self.tempofile == self.tempofile_cache)
