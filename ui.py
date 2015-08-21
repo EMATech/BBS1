@@ -191,7 +191,7 @@ class Bbs1App(Gtk.Application):
         :param data: Optional data
         :type menuitem: gtk.MenuItem
         """
-        about_dialog = self.builder.get_object("about_dialog")
+        about_dialog = self.builder.get_object('about_dialog')
         about_dialog.run()
         about_dialog.hide()
 
@@ -236,7 +236,7 @@ class Bbs1App(Gtk.Application):
         self._refresh_ui()
 
     def _refresh_ui(self):
-        # TODO: free space
+        # TODO: compute and display free space
         for i in range(0, self.tempofile.maps_count):
             igtk = str(i + 1)
             entryname = 'entry' + igtk
@@ -247,4 +247,4 @@ class Bbs1App(Gtk.Application):
             self.builder.get_object(switchname).set_state(self.tempofile.maps[i].looping)
 
         if self.tempofile != self.tempofile_cache:
-            self.builder.get_object("menu_apply").set_sensitive(True)
+            self.builder.get_object('menu_apply').set_sensitive(True)
