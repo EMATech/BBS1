@@ -57,7 +57,7 @@ class Map(object):
     def __eq__(self, other):
         return (isinstance(other, self.__class__)
                 and self.__dict__ == other.__dict__
-                and self.bars == other.bars)
+                and all([bar == otherbar for bar, otherbar in zip(self.bars, other.bars)]))
 
     def __ne__(self, other):
         return not self.__eq__(other)
