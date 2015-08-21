@@ -73,8 +73,12 @@ class Map(object):
     def set_name(self, name):
         """
         Set the map name correctly padded
+
+        :param name: Tempo map name
+        :type name: str
         """
         self.name = name.ljust(16, '\x00')
+
 
 class File(object):
     """
