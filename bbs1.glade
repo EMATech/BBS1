@@ -93,6 +93,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="stock_id">gtk-new</property>
+                <signal name="clicked" handler="on_menu_new_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -104,6 +105,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="stock_id">gtk-open</property>
+                <signal name="clicked" handler="on_menu_open_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -115,6 +117,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="stock_id">gtk-save-as</property>
+                <signal name="clicked" handler="on_menu_save_as_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -151,6 +154,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
                 <property name="stock_id">gtk-apply</property>
+                <signal name="clicked" handler="on_menu_apply_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1071,7 +1075,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
   </object>
   <object class="GtkAboutDialog" id="about_dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes">About</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">BBS1</property>
@@ -1158,7 +1161,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
   </object>
   <object class="GtkMessageDialog" id="comm_alert">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
@@ -1198,9 +1200,9 @@ Do you want to try again?</property>
   </object>
   <object class="GtkMessageDialog" id="connect_alert">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">BBS1</property>
@@ -1234,7 +1236,6 @@ Do you want to try again?</property>
   </object>
   <object class="GtkMessageDialog" id="init_alert">
     <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
@@ -1263,6 +1264,44 @@ Do you want to try again?</property>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="unimplemented_dialog">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Doh</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">BBS1</property>
+    <property name="buttons">cancel</property>
+    <property name="text" translatable="yes">Not implemented!</property>
+    <property name="secondary_text" translatable="yes">(Yet)</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox11">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area11">
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>

@@ -177,24 +177,21 @@ class Bbs1App(Gtk.Application):
 
     def normal(self):
         """Normal mode handling"""
-        self.refresh()
+        self._refresh()
 
     def firmware(self):
         """Firmware mode handling"""
         # TODO
         raise NotImplementedError
 
-    def on_menu_about_clicked(self, menuitem, data=None):
-        """
-        Show the about dialog
+    def on_menu_new_clicked(self, menuitem, data=None):
+        self._unimplemented()
 
-        :param menuitem: The menuitem that received the signal
-        :param data: Optional data
-        :type menuitem: gtk.MenuItem
-        """
-        about_dialog = self.builder.get_object('about_dialog')
-        about_dialog.run()
-        about_dialog.hide()
+    def on_menu_open_clicked(self, menuitem, data=None):
+        self._unimplemented()
+
+    def on_menu_save_as_clicked(self, menuitem, data=None):
+        self._unimplemented()
 
     def on_menu_refresh_clicked(self, menuitem, data=None):
         """
@@ -204,7 +201,27 @@ class Bbs1App(Gtk.Application):
         :param data: Optional data
         :type menuitem: gtk.MenuItem
         """
-        self.refresh()
+        self._refresh()
+
+    def _refresh(self):
+        """Refresh UI informations"""
+        self.tempofile = self.device.get_tempomaps()
+        self.tempofile_cache = deepcopy(self.tempofile)
+        logging.debug("Successfully cached tempo file: " + str(self.tempofile == self.tempofile_cache))
+        self._refresh_ui()
+
+    def _refresh_ui(self):
+        # TODO: compute and display free space
+        for i in range(0, self.tempofile.maps_count):
+            igtk = str(i + 1)
+            entryname = 'entry' + igtk
+            self.builder.get_object(entryname).set_text(self.tempofile.maps[i].name)
+            spinbuttonname = 'spinbutton' + igtk
+            self.builder.get_object(spinbuttonname).set_value(self.tempofile.maps[i].count_in)
+            switchname = 'switch' + igtk
+            self.builder.get_object(switchname).set_state(self.tempofile.maps[i].looping)
+
+        self.builder.get_object('menu_apply').set_sensitive(not self.tempofile == self.tempofile_cache)
 
     def on_menu_clear_all_clicked(self, menuitem, data=None):
         """
@@ -227,7 +244,7 @@ class Bbs1App(Gtk.Application):
         Clear all tempo maps
         """
         self.device.clear_tempomaps()
-        self.refresh()
+        self._refresh()
 
     def on_checkcleardontask_toggled(self, widget, data=None):
         """
@@ -239,12 +256,20 @@ class Bbs1App(Gtk.Application):
         """
         self.clear_confirm = not widget.get_active()
 
-    def refresh(self):
-        """Refresh UI informations"""
-        self.tempofile = self.device.get_tempomaps()
-        self.tempofile_cache = deepcopy(self.tempofile)
-        logging.debug("Successfully cached tempo file: " + str(self.tempofile == self.tempofile_cache))
-        self._refresh_ui()
+    def on_menu_apply_clicked(self, menuitem, data=None):
+        self._unimplemented()
+
+    def on_menu_about_clicked(self, menuitem, data=None):
+        """
+        Show the about dialog
+
+        :param menuitem: The menuitem that received the signal
+        :param data: Optional data
+        :type menuitem: gtk.MenuItem
+        """
+        about_dialog = self.builder.get_object('about_dialog')
+        about_dialog.run()
+        about_dialog.hide()
 
     def on_del_button_clicked(self, data=None):
         """
@@ -257,15 +282,7 @@ class Bbs1App(Gtk.Application):
         self.tempofile.maps[name - 1].reset()
         self._refresh_ui()
 
-    def _refresh_ui(self):
-        # TODO: compute and display free space
-        for i in range(0, self.tempofile.maps_count):
-            igtk = str(i + 1)
-            entryname = 'entry' + igtk
-            self.builder.get_object(entryname).set_text(self.tempofile.maps[i].name)
-            spinbuttonname = 'spinbutton' + igtk
-            self.builder.get_object(spinbuttonname).set_value(self.tempofile.maps[i].count_in)
-            switchname = 'switch' + igtk
-            self.builder.get_object(switchname).set_state(self.tempofile.maps[i].looping)
-
-        self.builder.get_object('menu_apply').set_sensitive(not self.tempofile == self.tempofile_cache)
+    def _unimplemented(self):
+        unimplemented = self.builder.get_object('unimplemented_dialog')
+        unimplemented.run()
+        unimplemented.hide()
