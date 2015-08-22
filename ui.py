@@ -184,16 +184,16 @@ class Bbs1App(Gtk.Application):
         # TODO
         raise NotImplementedError
 
-    def on_menu_new_clicked(self, menuitem, data=None):
+    def on_action_new_activate(self, menuitem, data=None):
         self._unimplemented()
 
-    def on_menu_open_clicked(self, menuitem, data=None):
+    def on_action_open_activate(self, menuitem, data=None):
         self._unimplemented()
 
-    def on_menu_save_as_clicked(self, menuitem, data=None):
+    def on_action_save_as_activate(self, menuitem, data=None):
         self._unimplemented()
 
-    def on_menu_refresh_clicked(self, menuitem, data=None):
+    def on_action_refresh_activate(self, menuitem, data=None):
         """
         Refresh tempo maps informations
 
@@ -241,7 +241,7 @@ class Bbs1App(Gtk.Application):
 
         self.builder.get_object('menu_apply').set_sensitive(not self.tempofile == self.tempofile_cache)
 
-    def on_menu_clear_all_clicked(self, menuitem, data=None):
+    def on_action_clear_activate(self, menuitem, data=None):
         """
         Handle clear all tempo maps button
 
@@ -250,21 +250,21 @@ class Bbs1App(Gtk.Application):
         :type menuitem: gtk.MenuItem
         """
         if self.clear_confirm:
-            confirm = self.builder.get_object('clear_all_confirm_dialog')
+            confirm = self.builder.get_object('clear_confirm_dialog')
             if confirm.run() == -8:
-                self._clear_all()
+                self._clear()
             confirm.hide()
         else:
-            self._clear_all()
+            self._clear()
 
-    def _clear_all(self):
+    def _clear(self):
         """
         Clear all tempo maps
         """
         self.device.clear_tempomaps()
         self._refresh()
 
-    def on_checkcleardontask_toggled(self, widget, data=None):
+    def on_check_clear_toggled(self, widget, data=None):
         """
         Don't ask before device clearing callback
 
@@ -274,10 +274,10 @@ class Bbs1App(Gtk.Application):
         """
         self.clear_confirm = not widget.get_active()
 
-    def on_menu_apply_clicked(self, menuitem, data=None):
+    def on_action_apply_activate(self, menuitem, data=None):
         self._unimplemented()
 
-    def on_menu_about_clicked(self, menuitem, data=None):
+    def on_action_about_activate(self, menuitem, data=None):
         """
         Show the about dialog
 
