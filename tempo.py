@@ -65,7 +65,9 @@ class Map(object):
         """
         Resets the map
         """
-        self.bars = []
+        self.start_offset = 0
+        self.length = 0
+        self.bars[:] = []
         self.name = ''.ljust(16, '\x00')
         self.looping = False
         self.count_in = 0
