@@ -53,7 +53,7 @@ class Communication(object):
         for i in range(0, devices):
             info = midi.get_device_info(i)
             # Name
-            if re.match('.*BodyBeatSYNC MIDI 1.*', str(info[1])):
+            if re.match('.*BodyBeatSYNC.*', str(info[1])):
                 # Input
                 if info[2] >= 1:
                     dev_in = i
