@@ -49,6 +49,7 @@ class Bbs1App(Gtk.Application):
                                  flags=Gio.ApplicationFlags.FLAGS_NONE)
 
         # Glade
+        logging.debug('Loading glade file')
         self.builder = Gtk.Builder()
         self.builder.add_from_file('bbs1.glade')
 
@@ -95,6 +96,7 @@ class Bbs1App(Gtk.Application):
 
         :param data: Optional data
         """
+        logging.debug('Initializing communication')
         try:
             self.com.__del__()
         except AttributeError:

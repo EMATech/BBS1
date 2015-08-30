@@ -36,16 +36,19 @@ class Communication(object):
 
     def __init__(self):
         """Initialize a MIDI communication channel"""
-        # Initialize Pygame's MIDI
+        logging.debug('Initializing Pygame MIDI')
         midi.init()
 
     def __del__(self):
         """Destroy MIDI communication channel"""
+        logging.debug('Quitting Pygame MIDI')
         midi.quit()
 
     # noinspection PyUnboundLocalVariable
     def connect(self):
         """Connect to the first BBS-1"""
+        logging.debug('Attempting MIDI connection')
+
         # Get number of MIDI devices
         devices = midi.get_count()
 
@@ -77,6 +80,7 @@ class Communication(object):
             raise IOError(error)
 
         # Open input and output
+        logging.debug('Opening MIDI ports')
         self.midi_in = midi.Input(dev_in)
         self.midi_out = midi.Output(dev_out)
 
@@ -89,7 +93,9 @@ class Communication(object):
         """
 
         logging.debug("->")
-        SysexMessage.parse(msg)  # For debugging messages
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            # Parse messages for debugging
+            SysexMessage.parse(msg)
 
         try:
             self.midi_out.write_sys_ex(0, msg)

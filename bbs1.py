@@ -32,6 +32,7 @@ import ui
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    logging.info('Application start')
     APP = ui.Bbs1App()
     APP.run(None)
     logging.info('Application exit')
