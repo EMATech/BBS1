@@ -114,12 +114,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">BBS1</property>
     <child>
-      <object class="GtkBox" id="box1">
+      <object class="GtkBox" id="box_main">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkToolbar" id="toolbar1">
+          <object class="GtkToolbar" id="toolbar_main">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="toolbar_style">both</property>
@@ -226,7 +226,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="grid1">
+          <object class="GtkGrid" id="grid_main">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="row_spacing">2</property>
@@ -283,6 +283,20 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </object>
               <packing>
                 <property name="left_attach">4</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="free_space">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="fraction">1</property>
+                <property name="pulse_step">0.01</property>
+                <property name="text" translatable="yes">Free space</property>
+                <property name="show_text">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">5</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -540,6 +554,158 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
+              <object class="GtkSpinButton" id="spinbutton2">
+                <property name="name">2</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment2</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton3">
+                <property name="name">3</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment3</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton4">
+                <property name="name">4</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment4</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton5">
+                <property name="name">5</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment5</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton6">
+                <property name="name">6</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment6</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton7">
+                <property name="name">7</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment7</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton8">
+                <property name="name">8</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment8</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">8</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton9">
+                <property name="name">9</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">1</property>
+                <property name="invisible_char">●</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment9</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="changed" handler="on_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">9</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkSwitch" id="switch1">
                 <property name="name">1</property>
                 <property name="visible">True</property>
@@ -772,6 +938,21 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
+              <object class="GtkButton" id="button2">
+                <property name="label" translatable="yes">Delete</property>
+                <property name="related_action"/>
+                <property name="name">2</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">5</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="button3">
                 <property name="label" translatable="yes">Delete</property>
                 <property name="related_action"/>
@@ -876,187 +1057,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="top_attach">9</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton2">
-                <property name="name">2</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment2</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton3">
-                <property name="name">3</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment3</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton4">
-                <property name="name">4</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment4</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">4</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton5">
-                <property name="name">5</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment5</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton6">
-                <property name="name">6</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment6</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton7">
-                <property name="name">7</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment7</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton8">
-                <property name="name">8</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment8</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">8</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton9">
-                <property name="name">9</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="max_length">1</property>
-                <property name="invisible_char">●</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">digits</property>
-                <property name="adjustment">adjustment9</property>
-                <property name="snap_to_ticks">True</property>
-                <property name="numeric">True</property>
-                <signal name="changed" handler="on_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">9</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button2">
-                <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
-                <property name="name">2</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_del_button_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">5</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkProgressBar" id="free_space">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="fraction">1</property>
-                <property name="pulse_step">0.01</property>
-                <property name="text" translatable="yes">Free space</property>
-                <property name="show_text">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">5</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -1065,12 +1065,12 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box3">
+          <object class="GtkBox" id="box_versions">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkBox" id="box4">
+              <object class="GtkBox" id="box_hw_version">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
@@ -1105,7 +1105,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="box5">
+              <object class="GtkBox" id="box_fw_version">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
@@ -1224,6 +1224,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+                <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="on_check_clear_toggled" swapped="no"/>
               </object>
