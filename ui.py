@@ -24,6 +24,8 @@ import logging
 
 try:
     # noinspection PyPackageRequirements,PyUnresolvedReferences
+    import gi
+    gi.require_version('Gtk', '3.0')
     from gi.repository import Gtk, Gio
 except ImportError:
     print("This script needs pygobject to run")

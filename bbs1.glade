@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 
+<!-- Generated with glade 3.19.0 
 
 Copyright (C) 2012-2015 Raphaël Doursenaud <rdoursenaud@free.fr>
 
@@ -23,7 +23,7 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
 -->
 <!--suppress XmlUnboundNsPrefix -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
+  <requires lib="gtk+" version="3.14"/>
   <!-- interface-license-type gplv3 -->
   <!-- interface-name BBS1 -->
   <!-- interface-description A tool to communicate with Peterson's BBS-1 metronome -->
@@ -925,7 +925,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
               <object class="GtkButton" id="button1">
                 <property name="label" translatable="yes">Delete</property>
                 <property name="use_action_appearance">False</property>
-                <property name="related_action"/>
                 <property name="name">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -940,7 +939,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button2">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -955,7 +953,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button3">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">3</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -970,7 +967,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button4">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">4</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -985,7 +981,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button5">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1000,7 +995,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button6">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1015,7 +1009,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button7">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">7</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1030,7 +1023,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button8">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">8</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1045,7 +1037,6 @@ Author: Raphaël Doursenaud <rdoursenaud@free.fr>
             <child>
               <object class="GtkButton" id="button9">
                 <property name="label" translatable="yes">Delete</property>
-                <property name="related_action"/>
                 <property name="name">9</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
