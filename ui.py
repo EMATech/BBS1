@@ -35,18 +35,19 @@ except ImportError:
 # noinspection PyUnusedLocal
 class Bbs1App(Gtk.Application):
     """BBS1 main GUI application"""
-    window = None
-    message = None
-    hw_vers = ''
-    fw_vers = ''
-    com = None
-    device = None
-    tempofile = None
-    tempofile_cache = None
-    clear_confirm = True  # Ask for confirmation before clearing device
 
     def __init__(self):
         """Application initialization"""
+        self.window = None
+        self.message = None
+        self.hw_vers = ''
+        self.fw_vers = ''
+        self.com = None
+        self.device = None
+        self.tempofile = None
+        self.tempofile_cache = None
+        self.clear_confirm = True  # Ask for confirmation before clearing device
+
         Gtk.Application.__init__(self, application_id='apps.bbs1',
                                  flags=Gio.ApplicationFlags.FLAGS_NONE)
 

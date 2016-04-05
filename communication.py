@@ -31,11 +31,11 @@ except ImportError:
 
 class Communication(object):
     """MIDI communication"""
-    midi_in = None
-    midi_out = None
 
     def __init__(self):
         """Initialize a MIDI communication channel"""
+        self.midi_in = None
+        self.midi_out = None
         logging.debug('Initializing Pygame MIDI')
         midi.init()
 
